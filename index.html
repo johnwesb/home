@@ -3,18 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>John Wesley — Digital Designer & UI/UX Specialist</title>
+    <meta name="description" content="Portfolio of John Wesley, a Digital Designer and UI/UX Specialist crafting intuitive and beautiful digital experiences.">
+    <meta name="keywords" content="UI/UX design, digital designer, portfolio, John Wesley">
+    <meta name="author" content="John Wesley">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" as="script">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" as="script">
+    <link rel="preload" href="style.css" as="style">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" crossorigin>
+    <title>John Wesley — Digital Designer & UI/UX Specialist</title>
 </head>
 <body>
-
-    <header class="main-header">
+    <a href="#main" class="skip-link">Skip to Content</a>
+    <div class="stars-layer"></div>
+    <div class="comets-layer"></div>
+    <div class="transition-overlay"></div>
+    <header class="main-header" role="banner">
         <div class="header-content">
             <a href="#" class="logo">John Wesley</a>
-            <nav class="main-nav">
+            <nav class="main-nav" role="navigation" aria-label="Main navigation">
                 <ul>
                     <li><a href="#projects">Projects</a></li>
                     <li><a href="#about">About</a></li>
@@ -23,8 +34,7 @@
             </nav>
         </div>
     </header>
-
-    <main>
+    <main id="main" role="main">
         <section class="hero">
             <div class="hero-content">
                 <h1>John Wesley</h1>
@@ -32,19 +42,17 @@
                 <p class="mission-statement">Crafting intuitive and beautiful digital experiences that put people first.</p>
             </div>
         </section>
-
-        <section id="projects" class="projects-section fade-in">
+        <section id="projects" class="projects-section">
             <div class="section-container">
-                <h2>Selected Work</h2>
+                <h2 class="section-title">Selected Work</h2>
                 <div class="projects-grid">
-
-                    <div class="project-item">
+                    <article class="project-item">
                         <div class="project-image">
-                            <img src="https://via.placeholder.com/800x600/E0E0E0/111111?text=Project+Alpha" alt="Project Alpha Screenshot">
+                            <img src="https://via.placeholder.com/800x600/E0E0E0/111111?text=Project+Alpha" alt="Screenshot of Project Alpha, a minimalist to-do app" loading="lazy" width="800" height="600">
                         </div>
                         <div class="project-info">
                             <h3>Project Alpha</h3>
-                            <p>A minimalist to-do app concept designed for focus.</p>
+                            <p>A minimalist to-do app concept designed for focus and productivity.</p>
                             <div class="project-tags">
                                 <span>UI Design</span>
                                 <span>Research</span>
@@ -52,11 +60,10 @@
                             </div>
                             <a href="#" class="case-study-link">View Case Study &rarr;</a>
                         </div>
-                    </div>
-
-                    <div class="project-item">
+                    </article>
+                    <article class="project-item">
                         <div class="project-image">
-                            <img src="https://via.placeholder.com/800x600/E0E0E0/111111?text=Project+Beta" alt="Project Beta Screenshot">
+                            <img src="https://via.placeholder.com/800x600/E0E0E0/111111?text=Project+Beta" alt="Screenshot of Project Beta, a responsive website" loading="lazy" width="800" height="600">
                         </div>
                         <div class="project-info">
                             <h3>Project Beta</h3>
@@ -68,11 +75,10 @@
                             </div>
                             <a href="#" class="case-study-link">View Case Study &rarr;</a>
                         </div>
-                    </div>
-
-                    <div class="project-item">
+                    </article>
+                    <article class="project-item">
                         <div class="project-image">
-                            <img src="https://via.placeholder.com/800x600/E0E0E0/111111?text=Project+Gamma" alt="Project Gamma Screenshot">
+                            <img src="https://via.placeholder.com/800x600/E0E0E0/111111?text=Project+Gamma" alt="Screenshot of Project Gamma, a music app prototype" loading="lazy" width="800" height="600">
                         </div>
                         <div class="project-info">
                             <h3>Project Gamma</h3>
@@ -83,16 +89,14 @@
                             </div>
                             <a href="#" class="case-study-link">View Case Study &rarr;</a>
                         </div>
-                    </div>
-
+                    </article>
                 </div>
             </div>
         </section>
-
-        <section id="about" class="about-section fade-in">
+        <section id="about" class="about-section">
             <div class="section-container about-content">
                 <div class="about-bio">
-                    <h2>About Me</h2>
+                    <h2 class="section-title">About Me</h2>
                     <p>I am a designer passionate about creating clean, user-centric interfaces. My design process is rooted in research and a deep understanding of user needs, resulting in products that are both functional and delightful to use.</p>
                 </div>
                 <div class="about-details">
@@ -119,28 +123,26 @@
                 </div>
             </div>
         </section>
-
-        <section id="contact" class="contact-section fade-in">
+        <section id="contact" class="contact-section">
             <div class="section-container">
-                <h2>Let's connect.</h2>
-                <p>Feel free to reach out for collaborations or just a friendly hello.</p>
+                <h2 class="section-title">Let's Connect</h2>
+                <p>Ready to collaborate? Let’s create something amazing together!</p>
                 <div class="contact-links">
-                    <a href="mailto:placeholder@example.com">Email</a>
+                    <a href="mailto:john.wesley@example.com">Email</a>
                     <a href="#">LinkedIn</a>
                     <a href="#">GitHub</a>
                 </div>
             </div>
         </section>
-
     </main>
-
-    <footer class="main-footer">
+    <footer class="main-footer" role="contentinfo">
         <div class="footer-content">
             <p>&copy; 2025 John Wesley</p>
-            <button id="theme-toggle" class="theme-toggle">Light / Dark</button>
+            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme"><span class="theme-icon">🌙</span> Dark Mode</button>
         </div>
     </footer>
-
-    <script src="script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+    <script src="script.js" defer></script>
 </body>
 </html>

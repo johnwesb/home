@@ -1,57 +1,104 @@
+// Production-ready - v1.0.0 - 2025-10-22
 document.addEventListener('DOMContentLoaded', () => {
-    // --- THEME TOGGLER LOGIC ---
+    const { gsap, ScrollTrigger } = window;
+
+    if (!gsap || !ScrollTrigger) {
+        console.error('GSAP or ScrollTrigger not loaded');
+        return;
+    }
+
     const themeToggle = document.getElementById('theme-toggle');
     const body = document.body;
+    const overlay = document.querySelector('.transition-overlay');
+    const sections = gsap.utils.toArray('.fade-in, .projects-section, .about-section, .contact-section');
 
-    // Function to apply the theme from localStorage on page load
+    if (!themeToggle || !overlay) {
+        console.warn('Theme toggle or overlay not found');
+        return;
+    }
+
     const applySavedTheme = () => {
         const savedTheme = localStorage.getItem('theme');
-        // Default to light mode if no theme is saved
-        if (savedTheme === 'dark') {
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (savedTheme) {
+            body.classList.toggle('dark-mode', savedTheme === 'dark');
+        } else if (prefersDark) {
             body.classList.add('dark-mode');
-        } else {
-            body.classList.remove('dark-mode');
         }
+        updateToggleButton();
     };
 
-    // Function to toggle the theme and save the user's preference
+    const updateToggleButton = () => {
+        const isDark = body.classList.contains('dark-mode');
+        themeToggle.innerHTML = isDark ? '<span class="theme-icon">☀️</span> Light Mode' : '<span class="theme-icon">🌙</span> Dark Mode';
+    };
+
     const toggleTheme = () => {
-        body.classList.toggle('dark-mode');
-        const currentTheme = body.classList.contains('dark-mode') ? 'dark' : 'light';
-        localStorage.setItem('theme', currentTheme);
-    };
-
-    // Attach event listener to the theme toggle button
-    if (themeToggle) {
-        themeToggle.addEventListener('click', toggleTheme);
-    }
-    // Apply the saved theme as soon as the DOM is loaded
-    applySavedTheme();
-
-
-    // --- FADE-IN ANIMATION ON SCROLL LOGIC ---
-    const animatedSections = document.querySelectorAll('.fade-in');
-
-    // IntersectionObserver is a modern API for detecting element visibility
-    const observerOptions = {
-        root: null, // observes intersections relative to the viewport
-        rootMargin: '0px',
-        threshold: 0.1 // Triggers when 10% of the element is visible
-    };
-
-    const observer = new IntersectionObserver((entries, observer) => {
-        entries.forEach(entry => {
-            // If the element is intersecting the viewport, add the 'is-visible' class
-            if (entry.isIntersecting) {
-                entry.target.classList.add('is-visible');
-                // Stop observing the element after the animation has been triggered once
-                observer.unobserve(entry.target);
+        const isDark = body.classList.contains('dark-mode');
+        gsap.to(overlay, {
+            opacity: 1,
+            duration: 0.3,
+            onComplete: () => {
+                body.classList.toggle('dark-mode');
+                const currentTheme = body.classList.contains('dark-mode') ? 'dark' : 'light';
+                localStorage.setItem('theme', currentTheme);
+                gsap.to(overlay, { opacity: 0, duration: 0.3 });
+                updateToggleButton();
             }
         });
-    }, observerOptions);
+    };
 
-    // Attach the observer to each section with the 'fade-in' class
-    animatedSections.forEach(section => {
-        observer.observe(section);
+    themeToggle.addEventListener('click', toggleTheme);
+
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applySavedTheme);
+
+    applySavedTheme();
+
+    // Animate sections on scroll
+    sections.forEach(section => {
+        gsap.from(section, {
+            opacity: 0,
+            y: 50,
+            duration: 1,
+            ease: 'power2.out',
+            scrollTrigger: {
+                trigger: section,
+                start: 'top 80%',
+                toggleActions: 'play none none reverse'
+            }
+        });
+    });
+
+    // Animate comet trails (randomized)
+    function animateComet(comet) {
+        const tl = gsap.timeline({ repeat: -1, delay: Math.random() * 5 });
+        tl.fromTo(comet, {
+            opacity: 0,
+            x: '-10%',
+            y: '-10%'
+        }, {
+            opacity: 1,
+            x: '120vw',
+            y: '120vh',
+            rotation: 360,
+            duration: 6,
+            ease: 'linear'
+        }).to(comet, {
+            opacity: 0,
+            duration: 0.5
+        });
+        return tl;
+    }
+
+    animateComet(document.querySelector('.comets-layer::before'));
+    animateComet(document.querySelector('.comets-layer::after'));
+
+    // Initial fade-in for hero
+    gsap.from('.hero-content', {
+        opacity: 0,
+        y: 30,
+        duration: 1.5,
+        ease: 'power3.out',
+        delay: 0.5
     });
 });
