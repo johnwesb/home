@@ -3,146 +3,312 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Portfolio of John Wesley, a Digital Designer and UI/UX Specialist crafting intuitive and beautiful digital experiences.">
-    <meta name="keywords" content="UI/UX design, digital designer, portfolio, John Wesley">
-    <meta name="author" content="John Wesley">
-    <meta name="robots" content="index, follow">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" as="script">
-    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" as="script">
-    <link rel="preload" href="style.css" as="style">
-    <link rel="stylesheet" href="style.css">
+    
+    <title>Alex Chen | Data Scientist & ML Engineer Portfolio</title>
+    <meta name="description" content="Portfolio of Alex Chen, a data scientist and machine learning engineer specializing in Python, PyTorch, and AWS.">
+    <meta name="keywords" content="Data Scientist, Machine Learning, Python, PyTorch, AWS, Portfolio, Alex Chen, Data Science Student">
+    <meta name="author" content="Alex Chen">
+
+    <meta property="og:title" content="Alex Chen | Data Scientist & ML Engineer">
+    <meta property="og:description" content="Turning data into decisions with Python, PyTorch, and AWS.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-username.github.io/">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230066ff'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-size='50' font-family='sans-serif' fill='%23ffffff'>AC</text></svg>">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet" crossorigin>
-    <title>John Wesley — Digital Designer & UI/UX Specialist</title>
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" as="style">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
 </head>
+
 <body>
-    <a href="#main" class="skip-link">Skip to Content</a>
-    <div class="stars-layer"></div>
-    <div class="comets-layer"></div>
-    <div class="transition-overlay"></div>
-    <header class="main-header" role="banner">
-        <div class="header-content">
-            <a href="#" class="logo">John Wesley</a>
-            <nav class="main-nav" role="navigation" aria-label="Main navigation">
-                <ul>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
+
+    <header class="header" id="header">
+        <nav class="nav container">
+            <a href="#" class="nav-logo">Alex Chen</a>
+            
+            <ul class="nav-menu">
+                <li><a href="#about" class="nav-link link-underline">About</a></li>
+                <li><a href="#projects" class="nav-link link-underline">Projects</a></li>
+                <li><a href="#experience" class="nav-link link-underline">Experience</a></li>
+                <li><a href="#contact" class="nav-link link-underline">Contact</a></li>
+            </ul>
+
+            <div class="nav-controls">
+                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">
+                    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.106a.75.75 0 010 1.06l-1.591 1.59a.75.75 0 11-1.06-1.06l1.59-1.59a.75.75 0 011.06 0zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.894 17.894a.75.75 0 011.06 0l1.59 1.59a.75.75 0 11-1.06 1.06l-1.59-1.59a.75.75 0 010-1.06zM12 21.75a.75.75 0 01-.75-.75v-2.25a.75.75 0 011.5 0V21a.75.75 0 01-.75.75zM5.106 17.894a.75.75 0 010 1.06l-1.59 1.59a.75.75 0 11-1.06-1.06l1.59-1.59a.75.75 0 011.06 0zM2.25 12a.75.75 0 01.75-.75h2.25a.75.75 0 010 1.5H3a.75.75 0 01-.75-.75zM6.106 5.106a.75.75 0 011.06 0l1.59 1.59a.75.75 0 11-1.06 1.06L5.106 6.166a.75.75 0 010-1.06z"></path></svg>
+                    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6.75c0 4.954 4.022 8.976 8.976 8.976.352 0 .7-.017 1.031-.049a.75.75 0 01.818.162.75.75 0 01.035.803A11.938 11.938 0 0112 21c-6.627 0-12-5.373-12-12 0-4.096 2.036-7.72 5.168-9.907a.75.75 0 01.86.035z" clip-rule="evenodd"></path></svg>
+                </button>
+                
+                <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu">
+                    <svg class="icon-menu" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
+                    <svg class="icon-close" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="display: none;"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+                </button>
+            </div>
+        </nav>
     </header>
-    <main id="main" role="main">
-        <section class="hero">
+
+    <div class="mobile-nav-menu" id="mobile-nav-menu">
+        <ul>
+            <li><a href="#about" class="mobile-nav-link">About</a></li>
+            <li><a href="#projects" class="mobile-nav-link">Projects</a></li>
+            <li><a href="#experience" class="mobile-nav-link">Experience</a></li>
+            <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
+        </ul>
+    </div>
+
+    <main>
+
+        <section class="hero" id="hero">
             <div class="hero-content">
-                <h1>John Wesley</h1>
-                <p class="subtitle">Digital Designer & UI/UX Specialist</p>
-                <p class="mission-statement">Crafting intuitive and beautiful digital experiences that put people first.</p>
-            </div>
-        </section>
-        <section id="projects" class="projects-section">
-            <div class="section-container">
-                <h2 class="section-title">Selected Work</h2>
-                <div class="projects-grid">
-                    <article class="project-item">
-                        <div class="project-image">
-                            <img src="https://via.placeholder.com/800x600/E0E0E0/111111?text=Project+Alpha" alt="Screenshot of Project Alpha, a minimalist to-do app" loading="lazy" width="800" height="600">
-                        </div>
-                        <div class="project-info">
-                            <h3>Project Alpha</h3>
-                            <p>A minimalist to-do app concept designed for focus and productivity.</p>
-                            <div class="project-tags">
-                                <span>UI Design</span>
-                                <span>Research</span>
-                                <span>Figma</span>
-                            </div>
-                            <a href="#" class="case-study-link">View Case Study &rarr;</a>
-                        </div>
-                    </article>
-                    <article class="project-item">
-                        <div class="project-image">
-                            <img src="https://via.placeholder.com/800x600/E0E0E0/111111?text=Project+Beta" alt="Screenshot of Project Beta, a responsive website" loading="lazy" width="800" height="600">
-                        </div>
-                        <div class="project-info">
-                            <h3>Project Beta</h3>
-                            <p>A responsive website for a sustainable lifestyle brand.</p>
-                            <div class="project-tags">
-                                <span>UX Design</span>
-                                <span>Webflow</span>
-                                <span>Branding</span>
-                            </div>
-                            <a href="#" class="case-study-link">View Case Study &rarr;</a>
-                        </div>
-                    </article>
-                    <article class="project-item">
-                        <div class="project-image">
-                            <img src="https://via.placeholder.com/800x600/E0E0E0/111111?text=Project+Gamma" alt="Screenshot of Project Gamma, a music app prototype" loading="lazy" width="800" height="600">
-                        </div>
-                        <div class="project-info">
-                            <h3>Project Gamma</h3>
-                            <p>An interaction design prototype for a music discovery app.</p>
-                            <div class="project-tags">
-                                <span>Interaction Design</span>
-                                <span>Prototyping</span>
-                            </div>
-                            <a href="#" class="case-study-link">View Case Study &rarr;</a>
-                        </div>
-                    </article>
+                <div class="hero-avatar" aria-hidden="true">AC</div>
+                <h1>Alex Chen</h1>
+                <p class="hero-subtitle">Data Scientist | Machine Learning Engineer</p>
+                <p class="hero-description">
+                    Turning data into decisions with Python, PyTorch, and AWS.
+                </p>
+                <div class="hero-cta">
+                    <a href="#projects" class="btn btn-primary">View Projects ↓</a>
+                    <a href="alex-chen-cv.pdf" download class="btn btn-outline">Download CV</a>
+                    <a href="#contact" class="btn btn-secondary">Let's Talk</a>
                 </div>
             </div>
         </section>
-        <section id="about" class="about-section">
-            <div class="section-container about-content">
-                <div class="about-bio">
-                    <h2 class="section-title">About Me</h2>
-                    <p>I am a designer passionate about creating clean, user-centric interfaces. My design process is rooted in research and a deep understanding of user needs, resulting in products that are both functional and delightful to use.</p>
-                </div>
-                <div class="about-details">
-                    <div class="skills-list">
-                        <h3>Skills</h3>
-                        <ul>
-                            <li>UI/UX Design</li>
-                            <li>Interaction Design</li>
-                            <li>Prototyping</li>
-                            <li>User Research</li>
-                            <li>Wireframing</li>
-                        </ul>
+
+        <section class="section" id="about">
+            <div class="container">
+                <h2 class="section-title fade-in">About Me</h2>
+                <div class="about-grid">
+                    <div class="about-text fade-in" style="transition-delay: 100ms;">
+                        <span class="fun-fact">Fun Fact: I'm a certified barista ☕</span>
+                        <h3>Crafting insights from complex data.</h3>
+                        <p>
+                            Hello! I'm Alex, a passionate data scientist currently pursuing my Master's in Data Science at Georgia Tech. My focus is on building and deploying robust machine learning models that solve real-world problems.
+                        </p>
+                        <p>
+                            With experience in natural language processing and deep learning, I thrive on the challenge of transforming raw data into actionable insights. I'm proficient in the full data science stack, from data wrangling with SQL and Pandas to building models with PyTorch and TensorFlow.
+                        </p>
+                        <p>
+                            I'm currently seeking internship opportunities where I can contribute to a challenging, data-driven environment and continue to grow my skills.
+                        </p>
                     </div>
-                    <div class="tools-list">
-                        <h3>Tools</h3>
-                        <ul>
-                            <li>Figma</li>
-                            <li>Webflow</li>
-                            <li>VS Code</li>
-                            <li>Adobe Creative Suite</li>
-                            <li>Notion</li>
-                        </ul>
+                    <div class="about-skills fade-in" style="transition-delay: 200ms;">
+                        <h3>Core Competencies</h3>
+                        <div class="skills-grid">
+                            <span class="skill-badge">Python</span>
+                            <span class="skill-badge">PyTorch</span>
+                            <span class="skill-badge">TensorFlow</span>
+                            <span class="skill-badge">Scikit-learn</span>
+                            <span class="skill-badge">SQL</span>
+                            <span class="skill-badge">Pandas</span>
+                            <span class="skill-badge">NumPy</span>
+                            <span class="skill-badge">AWS (S3, EC2)</span>
+                            <span class="skill-badge">Docker</span>
+                            <span class="skill-badge">NLP</span>
+                            <span class="skill-badge">Tableau</span>
+                            <span class="skill-badge">Git & GitHub</span>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-        <section id="contact" class="contact-section">
-            <div class="section-container">
-                <h2 class="section-title">Let's Connect</h2>
-                <p>Ready to collaborate? Let’s create something amazing together!</p>
-                <div class="contact-links">
-                    <a href="mailto:john.wesley@example.com">Email</a>
-                    <a href="#">LinkedIn</a>
-                    <a href="#">GitHub</a>
+
+        <section class="section" id="projects">
+            <div class="container">
+                <h2 class="section-title fade-in">Projects Showcase</h2>
+
+                <div class="project-filters fade-in" style="transition-delay: 100ms;" id="project-filters">
+                    <button class="filter-btn active" data-filter="all">All</button>
+                    <button class="filter-btn" data-filter="ml">ML</button>
+                    <button class="filter-btn" data-filter="nlp">NLP</button>
+                    <button class="filter-btn" data-filter="viz">Visualization</button>
+                </div>
+
+                <div class="projects-grid" id="projects-grid">
+                    
+                    <div class="project-card fade-in" data-category="ml">
+                        <div class="project-thumbnail" aria-hidden="true">Project Thumbnail</div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="project-tag">ML</span>
+                            </div>
+                            <h3>Stock Price Predictor</h3>
+                            <p>Developed an LSTM neural network to predict stock price movements based on historical data and sentiment analysis from news headlines.</p>
+                            <div class="project-links">
+                                <a href="#" class="link-underline" target="_blank" rel="noopener noreferrer">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
+                                    Live Demo
+                                </a>
+                                <a href="#" class="link-underline" target="_blank" rel="noopener noreferrer">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+                                    GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card fade-in" data-category="nlp">
+                        <div class="project-thumbnail" aria-hidden="true">Project Thumbnail</div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="project-tag secondary">NLP</span>
+                            </div>
+                            <h3>Sentiment Analysis Engine</h3>
+                            <p>Built and fine-tuned a BERT-based classifier for sentiment analysis on customer reviews, achieving 92% accuracy on the IMDB dataset.</p>
+                            <div class="project-links">
+                                <a href="#" class="link-underline" target="_blank" rel="noopener noreferrer">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+                                    GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card fade-in" data-category="viz">
+                        <div class="project-thumbnail" aria-hidden="true">Project Thumbnail</div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="project-tag">Viz</span>
+                            </div>
+                            <h3>Customer Churn Dashboard</h3>
+                            <p>Interactive Tableau dashboard visualizing key drivers of customer churn. Identified high-risk segments, leading to a 15% reduction in churn.</p>
+                            <div class="project-links">
+                                <a href="#" class="link-underline" target="_blank" rel="noopener noreferrer">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
+                                    Live Demo
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card fade-in" data-category="ml viz">
+                        <div class="project-thumbnail" aria-hidden="true">Project Thumbnail</div>
+                        <div class="project-content">
+                            <div class="project-tags">
+                                <span class="project-tag">ML</span>
+                                <span class="project-tag">Viz</span>
+                            </div>
+                            <h3>Real-Time Anomaly Detection</h3>
+                            <p>Used K-Means clustering and Isolation Forests to detect anomalies in AWS server log data, visualizing results in a live Grafana dashboard.</p>
+                            <div class="project-links">
+                                <a href="#" class="link-underline" target="_blank" rel="noopener noreferrer">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+                                    GitHub
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </section>
+        
+        <section class="section" id="experience">
+            <div class="container">
+                <h2 class="section-title fade-in">Experience & Education</h2>
+                <div class="timeline">
+                    
+                    <div class="timeline-item fade-in">
+                        <div class="timeline-dot" aria-hidden="true">🎓</div>
+                        <span class="timeline-date">2024 - Present</span>
+                        <h3>M.S. in Data Science</h3>
+                        <p>Georgia Institute of Technology</p>
+                    </div>
+                    
+                    <div class="timeline-item fade-in" style="transition-delay: 100ms;">
+                        <div class="timeline-dot" aria-hidden="true">💼</div>
+                        <span class="timeline-date">Summer 2024</span>
+                        <h3>Data Science Intern</h3>
+                        <p>AI Innovations Ltd. - Developed a recommendation engine that improved user engagement by 20%.</p>
+                    </div>
+                    
+                    <div class="timeline-item fade-in" style="transition-delay: 200ms;">
+                        <div class="timeline-dot" aria-hidden="true">🏆</div>
+                        <span class="timeline-date">Spring 2024</span>
+                        <h3>Kaggle Competition Winner</h3>
+                        <p>Placed in Top 5% in the "Titanic - Machine Learning from Disaster" competition. Practiced feature engineering and model tuning.</p>
+                    </div>
+                    
+                    <div class="timeline-item fade-in" style="transition-delay: 300ms;">
+                        <div class="timeline-dot" aria-hidden="true">🎓</div>
+                        <span class="timeline-date">2020 - 2024</span>
+                        <h3>B.S. in Computer Science</h3>
+                        <p>University of California, Berkeley - Graduated Summa Cum Laude with a minor in Statistics.</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="contact">
+            <div class="container">
+                <div class="contact-content">
+                    <h2 class="section-title fade-in">Get In Touch</h2>
+                    <p class="fade-in" style="transition-delay: 100ms;">
+                        I'm actively seeking new opportunities and collaborations. Whether you have a question or just want to connect, feel free to reach out.
+                    </p>
+                    
+                    <form class="contact-form fade-in" style="transition-delay: 200ms;" id="contact-form">
+                        
+                        <input type="hidden" name="contact_number">
+                        
+                        <div class="form-group">
+                            <label for="from_name">Name</label>
+                            <input type="text" id="from_name" name="from_name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="from_email">Email</label>
+                            <input type="email" id="from_email" name="from_email" class="form-control" required>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="message">Message</label>
+                            <textarea id="message" name="message" class="form-control" required></textarea>
+                        </div>
+                        <div class="form-group full-width" style="text-align: center;">
+                            <button type="submit" class="btn btn-primary" id="submit-btn">Send Message</button>
+                        </div>
+                    </form>
+                    
+                    <div class="contact-socials fade-in" style="transition-delay: 300ms;">
+                        <a href="#" class="social-icon" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.25 6.5 1.75 1.75 0 016.5 8.25zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.96 3.36 3.66z"></path></svg>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.165 6.839 9.489.5.09.682-.218.682-.484 0-.238-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.157-1.11-1.465-1.11-1.465-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.53 2.341 1.088 2.91.832.091-.647.349-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.949 0-1.09.39-1.984.029-2.684-.103-.253-.464-1.27.022-2.646 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.82c.85.004 1.705.114 2.504.336 1.909-1.296 2.747-1.026 2.747-1.026.486 1.376.125 2.393.023 2.646.64.7.029 1.595.029 2.684 0 3.848-2.339 4.693-4.566 4.942.359.309.678.92.678 1.856 0 1.338-.012 2.419-.012 2.746 0 .268.18.578.688.48A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd"></path></svg>
+                        </a>
+                        <a href="#" class="social-icon" aria-label="Kaggle" target="_blank" rel="noopener noreferrer">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M15.405 16.35l-2.071-2.072 2.071-2.071c.14-.14.19-.33.13-.51-.05-.18-.2-.31-.39-.31h-2.14v-2.14c0-.19-.13-.34-.31-.39-.18-.05-.37 0-.51.13l-2.071 2.071L8.03 8.98c-.14-.14-.33-.19-.51-.13-.18.05-.31.2-.31.39v2.14H5.07c-.19 0-.34.13-.39.31-.05.18 0 .37.13.51l2.071 2.071-2.071 2.071c-.14.14-.19.33-.13.51.05.18.2.31.39.31h2.14v2.14c0 .19.13.34.31.39.18.05.37 0 .51-.13l2.071-2.071 2.071 2.071c.14.14.33.19.51.13.18-.05.31-.2.31-.39v-2.14h2.14c.19 0 .34-.13.39-.31.05-.18 0 .37-.13-.51zM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12z"></input>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
-    <footer class="main-footer" role="contentinfo">
-        <div class="footer-content">
-            <p>&copy; 2025 John Wesley</p>
-            <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme"><span class="theme-icon">🌙</span> Dark Mode</button>
-        </div>
+    
+    <footer class="footer">
+        <p>
+            © 2025 Alex Chen. Built with <span class="heart" aria-label="love">❤️</span> on GitHub Pages.
+        </p>
     </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+
+    <a href="#hero" class="back-to-top" id="back-to-top" aria-label="Back to top">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
+        </svg>
+    </a>
+    
+    <div class="toast" id="toast-notification">
+        Message sent successfully!
+    </div>
+
+
     <script src="script.js" defer></script>
+    
 </body>
 </html>
