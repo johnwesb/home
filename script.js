@@ -1,192 +1,156 @@
-document.addEventListener("DOMContentLoaded", () => {
+// --- Initialization and Dark Mode Logic ---
+const htmlElement = document.documentElement;
+const modeToggleBtn = document.getElementById('mode-toggle');
+const mobileModeToggleBtn = document.getElementById('mobile-mode-toggle');
+const mobileMenuBtn = document.querySelector('[aria-label="Toggle mobile menu"]'); // For JS attachment
+
+function updateModeIcon(isDark) {
+    const iconClass = isDark ? 'fa-sun' : 'fa-moon';
+    const iconElement = `<i class="fas ${iconClass} text-xl"></i>`;
     
-    // -----------------------------------------------------------------
-    // 1. THEME TOGGLER (Light/Dark Mode)
-    // -----------------------------------------------------------------
-    const themeToggle = document.getElementById('theme-toggle');
+    if (modeToggleBtn) modeToggleBtn.innerHTML = iconElement;
+    if (mobileModeToggleBtn) mobileModeToggleBtn.innerHTML = iconElement;
+}
+
+function applyInitialMode() {
+    const savedMode = localStorage.getItem('color-theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     
-    // Check for saved theme in localStorage or system preference
-    const savedTheme = localStorage.getItem('theme');
-    const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    let currentTheme = savedTheme ? savedTheme : (systemPrefersDark ? 'dark' : 'light');
+    let isDark = savedMode === 'dark';
     
-    document.documentElement.setAttribute('data-theme', currentTheme);
-
-    themeToggle.addEventListener('click', () => {
-        // Toggle theme
-        currentTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-        document.documentElement.setAttribute('data-theme', currentTheme);
-        localStorage.setItem('theme', currentTheme);
-        
-        // Add rotation animation
-        themeToggle.classList.add('rotating');
-        setTimeout(() => {
-            themeToggle.classList.remove('rotating');
-        }, 300);
-    });
-
-    // -----------------------------------------------------------------
-    // 2. MOBILE NAVIGATION
-    // -----------------------------------------------------------------
-    const mobileNavToggle = document.getElementById('mobile-nav-toggle');
-    const mobileNavMenu = document.getElementById('mobile-nav-menu');
-    const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
-    const menuIcon = mobileNavToggle.querySelector('.icon-menu');
-    const closeIcon = mobileNavToggle.querySelector('.icon-close');
-
-    const toggleNav = () => {
-        const isActive = mobileNavMenu.classList.toggle('active');
-        mobileNavToggle.setAttribute('aria-expanded', isActive);
-        menuIcon.style.display = isActive ? 'none' : 'block';
-        closeIcon.style.display = isActive ? 'block' : 'none';
-        document.body.style.overflow = isActive ? 'hidden' : '';
-    };
-
-    mobileNavToggle.addEventListener('click', toggleNav);
-
-    // Close nav when a link is clicked
-    mobileNavLinks.forEach(link => {
-        link.addEventListener('click', toggleNav);
-    });
-
-    // -----------------------------------------------------------------
-    // 3. INTERSECTION OBSERVER (Fade-in animations)
-    // -----------------------------------------------------------------
-    const fadeElements = document.querySelectorAll('.fade-in');
-
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
-
-    const observerCallback = (entries, observer) => {
-        entries.forEach((entry, index) => {
-            if (entry.isIntersecting) {
-                // Apply stagger delay if not already set
-                if (!entry.target.style.transitionDelay) {
-                     entry.target.style.transitionDelay = `${index * 50}ms`;
-                }
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
-            }
-        });
-    };
-
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
-    fadeElements.forEach(el => observer.observe(el));
-
-    // -----------------------------------------------------------------
-    // 4. HEADER SCROLL STATE
-    // -----------------------------------------------------------------
-    const header = document.getElementById('header');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
-
-    // -----------------------------------------------------------------
-    // 5. BACK TO TOP BUTTON
-    // -----------------------------------------------------------------
-    const backToTop = document.getElementById('back-to-top');
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > window.innerHeight) {
-            backToTop.classList.add('visible');
-        } else {
-            backToTop.classList.remove('visible');
-        }
-    });
-
-    // -----------------------------------------------------------------
-    // 6. PROJECT FILTERING
-    // -----------------------------------------------------------------
-    const filterContainer = document.getElementById('project-filters');
-    const filterBtns = filterContainer ? filterContainer.querySelectorAll('.filter-btn') : [];
-    const projectGrid = document.getElementById('projects-grid');
-    const projectCards = projectGrid ? Array.from(projectGrid.children) : [];
-
-    if (filterContainer) {
-        filterContainer.addEventListener('click', (e) => {
-            if (!e.target.matches('.filter-btn')) return;
-            
-            const filterValue = e.target.dataset.filter;
-            
-            // Update active button
-            filterBtns.forEach(btn => btn.classList.remove('active'));
-            e.target.classList.add('active');
-            
-            // Filter cards
-            projectCards.forEach(card => {
-                const categories = card.dataset.category.split(' ');
-                const shouldShow = (filterValue === 'all' || categories.includes(filterValue));
-                
-                if (shouldShow) {
-                    card.classList.remove('hide');
-                } else {
-                    card.classList.add('hide');
-                }
-            });
-        });
+    if (!savedMode) {
+        isDark = htmlElement.classList.contains('dark') || prefersDark;
     }
-    
-    // -----------------------------------------------------------------
-    // 7. EMAILJS CONTACT FORM
-    // -----------------------------------------------------------------
-    const contactForm = document.getElementById('contact-form');
-    const submitBtn = document.getElementById('submit-btn');
-    const toast = document.getElementById('toast-notification');
 
-    // --- IMPORTANT ---
-    // Replace with your EmailJS credentials
-    // -----------------
-    const EMAILJS_PUBLIC_KEY = "YOUR_PUBLIC_KEY";
-    const EMAILJS_SERVICE_ID = "YOUR_SERVICE_ID";
-    const EMAILJS_TEMPLATE_ID = "YOUR_TEMPLATE_ID";
-    // -----------------
-
-    // Check if emailjs is loaded
-    if (typeof emailjs !== 'undefined') {
-        emailjs.init(EMAILJS_PUBLIC_KEY);
+    if (isDark) {
+        htmlElement.classList.add('dark');
     } else {
-        console.error("EmailJS SDK not loaded. Make sure the CDN link is in your HTML <head>.");
+        htmlElement.classList.remove('dark');
+    }
+    updateModeIcon(isDark);
+}
+
+function toggleDarkMode() {
+    const isCurrentlyDark = htmlElement.classList.contains('dark');
+    
+    if (isCurrentlyDark) {
+        htmlElement.classList.remove('dark');
+        localStorage.setItem('color-theme', 'light');
+        updateModeIcon(false);
+    } else {
+        htmlElement.classList.add('dark');
+        localStorage.setItem('color-theme', 'dark');
+        updateModeIcon(true);
+    }
+}
+
+// --- Mobile Menu Toggle (now via JS for consistency) ---
+function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    menu.classList.toggle('hidden');
+}
+
+// --- Typing Effect ---
+const textElement = document.getElementById('typing-text');
+const phrases = ["Insights.", "Predictions.", "Value.", "Automation."];
+let phraseIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+let typeSpeed = 100;
+
+function type() {
+    if (!textElement) return;
+
+    const currentPhrase = phrases[phraseIndex];
+    
+    if (isDeleting) {
+        textElement.textContent = currentPhrase.substring(0, charIndex - 1);
+        charIndex--;
+        typeSpeed = 40;
+    } else {
+        textElement.textContent = currentPhrase.substring(0, charIndex + 1);
+        charIndex++;
+        typeSpeed = 120;
     }
 
-    const showToast = (message, isError = false) => {
-        toast.textContent = message;
-        toast.className = 'toast show';
-        if (isError) {
-            toast.classList.add('error');
-        } else {
-            toast.classList.add('success');
-        }
+    if (!isDeleting && charIndex === currentPhrase.length) {
+        isDeleting = true;
+        typeSpeed = 2500;
+    } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        typeSpeed = 600;
+    }
+
+    setTimeout(type, typeSpeed);
+}
+
+// --- Enhanced Form Handling (Simulation with Validation) ---
+function validateEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+async function handleFormSubmit(event) {
+    event.preventDefault();
+    const form = event.target;
+    const btn = document.getElementById('submit-btn');
+    const successMsg = document.getElementById('formSuccess');
+    const errorMsg = document.getElementById('formError');
+    const originalText = btn.innerText;
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+    
+    successMsg.classList.add('hidden');
+    errorMsg.classList.add('hidden');
+
+    if (!name || !email || !message) {
+        errorMsg.classList.remove('hidden');
+        return;
+    }
+
+    if (!validateEmail(email)) {
+        errorMsg.textContent = 'Please enter a valid email address.';
+        errorMsg.classList.remove('hidden');
+        return;
+    }
+
+    btn.innerText = 'Sending...';
+    btn.disabled = true;
+    btn.classList.add('opacity-70');
+
+    // Simulate (or replace with Firebase as before)
+    setTimeout(() => {
+        form.reset();
+        successMsg.classList.remove('hidden');
+        
+        btn.innerText = originalText;
+        btn.disabled = false;
+        btn.classList.remove('opacity-70');
+        
         setTimeout(() => {
-            toast.classList.remove('show');
-        }, 3000);
-    };
+            successMsg.classList.add('hidden');
+        }, 5000);
+    }, 1800);
+}
 
-    if (contactForm && typeof emailjs !== 'undefined') {
-        contactForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            
-            submitBtn.disabled = true;
-            submitBtn.textContent = 'Sending...';
-
-            emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, this)
-                .then(() => {
-                    showToast('Message sent successfully!');
-                    contactForm.reset();
-                }, (error) => {
-                    showToast('Failed to send message. Please try again.', true);
-                    console.error('EmailJS Error:', error);
-                })
-                .finally(() => {
-                    submitBtn.disabled = false;
-                    submitBtn.textContent = 'Send Message';
-                });
-        });
-    }
-
-}); // End DOMContentLoaded
+// --- Event Listeners (DOMContentLoaded) ---
+document.addEventListener('DOMContentLoaded', () => {
+    applyInitialMode();
+    type();
+    
+    // Fix: Wire up dark mode toggles
+    if (modeToggleBtn) modeToggleBtn.addEventListener('click', toggleDarkMode);
+    if (mobileModeToggleBtn) mobileModeToggleBtn.addEventListener('click', toggleDarkMode);
+    
+    // Mobile menu (now JS-attached for consistency; remove onclick from HTML if desired)
+    if (mobileMenuBtn) mobileMenuBtn.addEventListener('click', toggleMobileMenu);
+    
+    // Form submit
+    const form = document.getElementById('contactForm');
+    if (form) form.addEventListener('submit', handleFormSubmit);
+    
+    // Dynamic footer year
+    const yearElement = document.getElementById('footer-year');
+    if (yearElement) yearElement.textContent = `© ${new Date().getFullYear()} Alex Chen. Data Science Portfolio. | Made with Blue & Code.`;
+});

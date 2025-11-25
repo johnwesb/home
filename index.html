@@ -1,314 +1,300 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth dark">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Alex Chen | Data Science Portfolio</title>
     
-    <title>Alex Chen | Data Scientist & ML Engineer Portfolio</title>
-    <meta name="description" content="Portfolio of Alex Chen, a data scientist and machine learning engineer specializing in Python, PyTorch, and AWS.">
-    <meta name="keywords" content="Data Scientist, Machine Learning, Python, PyTorch, AWS, Portfolio, Alex Chen, Data Science Student">
-    <meta name="author" content="Alex Chen">
-
-    <meta property="og:title" content="Alex Chen | Data Scientist & ML Engineer">
-    <meta property="og:description" content="Turning data into decisions with Python, PyTorch, and AWS.">
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Alex Chen's portfolio showcasing expertise in data science, machine learning, and data-driven applications. Explore projects in NLP, time-series forecasting, and cloud pipelines.">
+    <meta name="keywords" content="data science, machine learning, Python, NLP, portfolio, Alex Chen">
+    
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://your-username.github.io/">
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230066ff'/><text x='50%25' y='50%25' dominant-baseline='central' text-anchor='middle' font-size='50' font-family='sans-serif' fill='%23ffffff'>AC</text></svg>">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" as="style">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+    <meta property="og:title" content="Alex Chen | Data Science Portfolio">
+    <meta property="og:description" content="Aspiring Data Scientist skilled in Machine Learning, Statistical Modeling, and building robust, data-driven applications.">
+    <meta property="og:url" content="https://alexchen-ds.com">
+    <meta property="og:image" content="https://alexchen-ds.com/og-image.jpg">
     
-    <link rel="stylesheet" href="style.css">
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Alex Chen | Data Science Portfolio">
+    <meta property="twitter:description" content="Turning data into Insights. Explore my projects!">
+    <meta property="twitter:image" content="https://alexchen-ds.com/twitter-image.jpg">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts Preload + Link -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Fira+Code:wght@400;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet"></noscript>
 
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <!-- Tailwind Config (for CDN; move to build step for full separation) -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#10b981',
+                    }
+                }
+            }
+        }
+    </script>
 
+    <!-- Custom CSS Link -->
+    <link rel="stylesheet" href="styles.css">
 </head>
+<body class="font-sans bg-white text-gray-900 dark:bg-black dark:text-slate-100 transition-colors duration-500 min-h-screen">
 
-<body>
-
-    <header class="header" id="header">
-        <nav class="nav container">
-            <a href="#" class="nav-logo">Alex Chen</a>
-            
-            <ul class="nav-menu">
-                <li><a href="#about" class="nav-link link-underline">About</a></li>
-                <li><a href="#projects" class="nav-link link-underline">Projects</a></li>
-                <li><a href="#experience" class="nav-link link-underline">Experience</a></li>
-                <li><a href="#contact" class="nav-link link-underline">Contact</a></li>
-            </ul>
-
-            <div class="nav-controls">
-                <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode">
-                    <svg class="icon-sun" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.106a.75.75 0 010 1.06l-1.591 1.59a.75.75 0 11-1.06-1.06l1.59-1.59a.75.75 0 011.06 0zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.894 17.894a.75.75 0 011.06 0l1.59 1.59a.75.75 0 11-1.06 1.06l-1.59-1.59a.75.75 0 010-1.06zM12 21.75a.75.75 0 01-.75-.75v-2.25a.75.75 0 011.5 0V21a.75.75 0 01-.75.75zM5.106 17.894a.75.75 0 010 1.06l-1.59 1.59a.75.75 0 11-1.06-1.06l1.59-1.59a.75.75 0 011.06 0zM2.25 12a.75.75 0 01.75-.75h2.25a.75.75 0 010 1.5H3a.75.75 0 01-.75-.75zM6.106 5.106a.75.75 0 011.06 0l1.59 1.59a.75.75 0 11-1.06 1.06L5.106 6.166a.75.75 0 010-1.06z"></path></svg>
-                    <svg class="icon-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6.75c0 4.954 4.022 8.976 8.976 8.976.352 0 .7-.017 1.031-.049a.75.75 0 01.818.162.75.75 0 01.035.803A11.938 11.938 0 0112 21c-6.627 0-12-5.373-12-12 0-4.096 2.036-7.72 5.168-9.907a.75.75 0 01.86.035z" clip-rule="evenodd"></path></svg>
-                </button>
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 nav-bg">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <a href="#home" class="font-extrabold text-2xl tracking-wider text-gray-900 dark:text-white transition-colors duration-500" aria-label="Home">
+                        Alex<span class="text-primary">.ds</span>
+                    </a>
+                </div>
                 
-                <button class="mobile-nav-toggle" id="mobile-nav-toggle" aria-label="Toggle navigation menu">
-                    <svg class="icon-menu" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
-                    <svg class="icon-close" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" style="display: none;"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
-                </button>
-            </div>
-        </nav>
-    </header>
-
-    <div class="mobile-nav-menu" id="mobile-nav-menu">
-        <ul>
-            <li><a href="#about" class="mobile-nav-link">About</a></li>
-            <li><a href="#projects" class="mobile-nav-link">Projects</a></li>
-            <li><a href="#experience" class="mobile-nav-link">Experience</a></li>
-            <li><a href="#contact" class="mobile-nav-link">Contact</a></li>
-        </ul>
-    </div>
-
-    <main>
-
-        <section class="hero" id="hero">
-            <div class="hero-content">
-                <div class="hero-avatar" aria-hidden="true">AC</div>
-                <h1>Alex Chen</h1>
-                <p class="hero-subtitle">Data Scientist | Machine Learning Engineer</p>
-                <p class="hero-description">
-                    Turning data into decisions with Python, PyTorch, and AWS.
-                </p>
-                <div class="hero-cta">
-                    <a href="#projects" class="btn btn-primary">View Projects ↓</a>
-                    <a href="alex-chen-cv.pdf" download class="btn btn-outline">Download CV</a>
-                    <a href="#contact" class="btn btn-secondary">Let's Talk</a>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" id="about">
-            <div class="container">
-                <h2 class="section-title fade-in">About Me</h2>
-                <div class="about-grid">
-                    <div class="about-text fade-in" style="transition-delay: 100ms;">
-                        <span class="fun-fact">Fun Fact: I'm a certified barista ☕</span>
-                        <h3>Crafting insights from complex data.</h3>
-                        <p>
-                            Hello! I'm Alex, a passionate data scientist currently pursuing my Master's in Data Science at Georgia Tech. My focus is on building and deploying robust machine learning models that solve real-world problems.
-                        </p>
-                        <p>
-                            With experience in natural language processing and deep learning, I thrive on the challenge of transforming raw data into actionable insights. I'm proficient in the full data science stack, from data wrangling with SQL and Pandas to building models with PyTorch and TensorFlow.
-                        </p>
-                        <p>
-                            I'm currently seeking internship opportunities where I can contribute to a challenging, data-driven environment and continue to grow my skills.
-                        </p>
+                <!-- Desktop Menu & Mode Toggle -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <div class="flex items-baseline space-x-4">
+                        <a href="#home" class="text-subtle hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="#about" class="text-subtle hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">About</a>
+                        <a href="#projects" class="text-subtle hover:text-primary transition-colors px-3 py-2 rounded-md text-sm font-medium">Projects</a>
+                        <a href="#contact" class="bg-primary hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 shadow-md shadow-blue-500/30">Contact</a>
                     </div>
-                    <div class="about-skills fade-in" style="transition-delay: 200ms;">
-                        <h3>Core Competencies</h3>
-                        <div class="skills-grid">
-                            <span class="skill-badge">Python</span>
-                            <span class="skill-badge">PyTorch</span>
-                            <span class="skill-badge">TensorFlow</span>
-                            <span class="skill-badge">Scikit-learn</span>
-                            <span class="skill-badge">SQL</span>
-                            <span class="skill-badge">Pandas</span>
-                            <span class="skill-badge">NumPy</span>
-                            <span class="skill-badge">AWS (S3, EC2)</span>
-                            <span class="skill-badge">Docker</span>
-                            <span class="skill-badge">NLP</span>
-                            <span class="skill-badge">Tableau</span>
-                            <span class="skill-badge">Git & GitHub</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section" id="projects">
-            <div class="container">
-                <h2 class="section-title fade-in">Projects Showcase</h2>
-
-                <div class="project-filters fade-in" style="transition-delay: 100ms;" id="project-filters">
-                    <button class="filter-btn active" data-filter="all">All</button>
-                    <button class="filter-btn" data-filter="ml">ML</button>
-                    <button class="filter-btn" data-filter="nlp">NLP</button>
-                    <button class="filter-btn" data-filter="viz">Visualization</button>
+                    <button id="mode-toggle" type="button" class="p-2 rounded-full text-gray-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors duration-300 touch-manipulation" aria-label="Toggle dark mode">
+                        <i class="fas fa-sun text-xl"></i>
+                    </button>
                 </div>
 
-                <div class="projects-grid" id="projects-grid">
-                    
-                    <div class="project-card fade-in" data-category="ml">
-                        <div class="project-thumbnail" aria-hidden="true">Project Thumbnail</div>
-                        <div class="project-content">
-                            <div class="project-tags">
-                                <span class="project-tag">ML</span>
-                            </div>
-                            <h3>Stock Price Predictor</h3>
-                            <p>Developed an LSTM neural network to predict stock price movements based on historical data and sentiment analysis from news headlines.</p>
-                            <div class="project-links">
-                                <a href="#" class="link-underline" target="_blank" rel="noopener noreferrer">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
-                                    Live Demo
-                                </a>
-                                <a href="#" class="link-underline" target="_blank" rel="noopener noreferrer">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
-                                    GitHub
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card fade-in" data-category="nlp">
-                        <div class="project-thumbnail" aria-hidden="true">Project Thumbnail</div>
-                        <div class="project-content">
-                            <div class="project-tags">
-                                <span class="project-tag secondary">NLP</span>
-                            </div>
-                            <h3>Sentiment Analysis Engine</h3>
-                            <p>Built and fine-tuned a BERT-based classifier for sentiment analysis on customer reviews, achieving 92% accuracy on the IMDB dataset.</p>
-                            <div class="project-links">
-                                <a href="#" class="link-underline" target="_blank" rel="noopener noreferrer">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
-                                    GitHub
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card fade-in" data-category="viz">
-                        <div class="project-thumbnail" aria-hidden="true">Project Thumbnail</div>
-                        <div class="project-content">
-                            <div class="project-tags">
-                                <span class="project-tag">Viz</span>
-                            </div>
-                            <h3>Customer Churn Dashboard</h3>
-                            <p>Interactive Tableau dashboard visualizing key drivers of customer churn. Identified high-risk segments, leading to a 15% reduction in churn.</p>
-                            <div class="project-links">
-                                <a href="#" class="link-underline" target="_blank" rel="noopener noreferrer">
-                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H5.25A2.25 2.25 0 003 8.25v10.5A2.25 2.25 0 005.25 21h10.5A2.25 2.25 0 0018 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25" /></svg>
-                                    Live Demo
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <div class="project-card fade-in" data-category="ml viz">
-                        <div class="project-thumbnail" aria-hidden="true">Project Thumbnail</div>
-                        <div class="project-content">
-                            <div class="project-tags">
-                                <span class="project-tag">ML</span>
-                                <span class="project-tag">Viz</span>
-                            </div>
-                            <h3>Real-Time Anomaly Detection</h3>
-                            <p>Used K-Means clustering and Isolation Forests to detect anomalies in AWS server log data, visualizing results in a live Grafana dashboard.</p>
-                            <div class="project-links">
-                                <a href="#" class="link-underline" target="_blank" rel="noopener noreferrer">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
-                                    GitHub
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-
+                <!-- Mobile menu button & Mode Toggle -->
+                <div class="-mr-2 flex md:hidden items-center space-x-3">
+                    <button id="mobile-mode-toggle" type="button" class="p-2 rounded-full text-gray-600 dark:text-slate-400 hover:text-primary dark:hover:text-primary transition-colors duration-300 touch-manipulation" aria-label="Toggle dark mode">
+                        <i class="fas fa-sun text-xl"></i>
+                    </button>
+                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-600 dark:text-slate-400 hover:bg-gray-100 dark:hover:bg-slate-800 focus:outline-none transition-colors duration-300 touch-manipulation" aria-label="Toggle mobile menu">
+                        <i class="fas fa-bars text-xl"></i>
+                        <span class="sr-only">Menu</span>
+                    </button>
                 </div>
             </div>
-        </section>
-        
-        <section class="section" id="experience">
-            <div class="container">
-                <h2 class="section-title fade-in">Experience & Education</h2>
-                <div class="timeline">
-                    
-                    <div class="timeline-item fade-in">
-                        <div class="timeline-dot" aria-hidden="true">🎓</div>
-                        <span class="timeline-date">2024 - Present</span>
-                        <h3>M.S. in Data Science</h3>
-                        <p>Georgia Institute of Technology</p>
-                    </div>
-                    
-                    <div class="timeline-item fade-in" style="transition-delay: 100ms;">
-                        <div class="timeline-dot" aria-hidden="true">💼</div>
-                        <span class="timeline-date">Summer 2024</span>
-                        <h3>Data Science Intern</h3>
-                        <p>AI Innovations Ltd. - Developed a recommendation engine that improved user engagement by 20%.</p>
-                    </div>
-                    
-                    <div class="timeline-item fade-in" style="transition-delay: 200ms;">
-                        <div class="timeline-dot" aria-hidden="true">🏆</div>
-                        <span class="timeline-date">Spring 2024</span>
-                        <h3>Kaggle Competition Winner</h3>
-                        <p>Placed in Top 5% in the "Titanic - Machine Learning from Disaster" competition. Practiced feature engineering and model tuning.</p>
-                    </div>
-                    
-                    <div class="timeline-item fade-in" style="transition-delay: 300ms;">
-                        <div class="timeline-dot" aria-hidden="true">🎓</div>
-                        <span class="timeline-date">2020 - 2024</span>
-                        <h3>B.S. in Computer Science</h3>
-                        <p>University of California, Berkeley - Graduated Summa Cum Laude with a minor in Statistics.</p>
-                    </div>
+        </div>
 
-                </div>
+        <!-- Mobile Menu -->
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-white dark:bg-black border-t border-gray-100 dark:border-slate-800">
+                <a href="#home" onclick="toggleMobileMenu()" class="text-gray-900 dark:text-slate-100 hover:text-primary block px-3 py-2 rounded-md text-base font-medium transition-colors">Home</a>
+                <a href="#about" onclick="toggleMobileMenu()" class="text-gray-900 dark:text-slate-100 hover:text-primary block px-3 py-2 rounded-md text-base font-medium transition-colors">About</a>
+                <a href="#projects" onclick="toggleMobileMenu()" class="text-gray-900 dark:text-slate-100 hover:text-primary block px-3 py-2 rounded-md text-base font-medium transition-colors">Projects</a>
+                <a href="#contact" onclick="toggleMobileMenu()" class="text-primary block px-3 py-2 rounded-md text-base font-medium font-bold">Contact</a>
             </div>
-        </section>
+        </div>
+    </nav>
 
-        <section class="section" id="contact">
-            <div class="container">
-                <div class="contact-content">
-                    <h2 class="section-title fade-in">Get In Touch</h2>
-                    <p class="fade-in" style="transition-delay: 100ms;">
-                        I'm actively seeking new opportunities and collaborations. Whether you have a question or just want to connect, feel free to reach out.
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center justify-center relative overflow-hidden pt-32 pb-12">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <span class="inline-block px-4 py-1 mb-4 text-sm font-semibold tracking-wider text-primary bg-blue-100 dark:bg-blue-900/30 rounded-full border border-primary/50 transition-colors duration-500">
+                Data Science Student Portfolio
+            </span>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold mb-6 text-gray-900 dark:text-slate-100 leading-tight">
+                Hi, I'm <span class="text-gradient">Alex Chen</span>
+            </h1>
+            <h2 class="text-lg md:text-2xl text-subtle mb-8 font-mono">
+                Turning data into <span id="typing-text" class="text-secondary dark:text-secondary transition-colors duration-500"></span><span class="cursor">&nbsp;</span>
+            </h2>
+            <p class="max-w-3xl mx-auto text-subtle mb-10 text-lg">
+                Aspiring Data Scientist skilled in Machine Learning, Statistical Modeling, and building robust, data-driven applications.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#projects" class="px-8 py-3 bg-primary hover:bg-blue-700 text-white rounded-xl font-semibold transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg shadow-blue-500/40 touch-manipulation">
+                    View Projects
+                </a>
+                <a href="https://github.com/AlexChenDS" target="_blank" rel="noopener noreferrer" class="px-8 py-3 bg-white dark:bg-slate-700 hover:bg-gray-100 dark:hover:bg-slate-600 text-gray-900 dark:text-white border border-gray-200 dark:border-slate-600 rounded-xl font-semibold transition-all duration-300 flex items-center justify-center gap-2 shadow-md touch-manipulation">
+                    <i class="fab fa-github"></i> GitHub
+                </a>
+            </div>
+            
+            <div class="mt-16 animate-bounce">
+                <a href="#about" class="text-subtle hover:text-primary transition-colors" aria-label="Scroll to About section">
+                    <i class="fas fa-chevron-down text-3xl"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-50 dark:bg-gray-900 transition-colors duration-500">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900 dark:text-slate-100">A Bit About My Journey</h2>
+                <p class="text-subtle text-lg">My passion lies at the intersection of statistics and code.</p>
+            </div>
+            <div class="flex flex-col md:flex-row items-start gap-12">
+                
+                <div class="w-full md:w-1/2">
+                    <h3 class="text-2xl font-bold mb-4 text-primary">Skills & Expertise</h3>
+                    <p class="text-subtle mb-6">
+                        I specialize in end-to-end data science projects, from initial data cleaning to model deployment.
                     </p>
-                    
-                    <form class="contact-form fade-in" style="transition-delay: 200ms;" id="contact-form">
+                    <div class="flex flex-wrap gap-2" role="list">
+                        <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900/30 text-primary rounded-full text-sm font-mono" role="listitem">Python (Pandas, NumPy)</span>
+                        <span class="px-3 py-1 bg-green-100 dark:bg-green-900/30 text-secondary rounded-full text-sm font-mono" role="listitem">Scikit-Learn, TensorFlow</span>
+                        <span class="px-3 py-1 bg-yellow-100 dark:bg-yellow-900/30 text-yellow-500 rounded-full text-sm font-mono" role="listitem">SQL & NoSQL</span>
+                        <span class="px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-500 rounded-full text-sm font-mono" role="listitem">Data Visualization (Matplotlib, Plotly)</span>
+                        <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900/30 text-indigo-500 rounded-full text-sm font-mono" role="listitem">Git & Docker</span>
+                    </div>
+                </div>
+                
+                <div class="w-full md:w-1/2">
+                    <h3 class="text-2xl font-bold mb-4 text-primary">Timeline</h3>
+                     <div class="relative border-l border-gray-200 dark:border-slate-700 ml-3 space-y-8">
                         
-                        <input type="hidden" name="contact_number">
-                        
-                        <div class="form-group">
-                            <label for="from_name">Name</label>
-                            <input type="text" id="from_name" name="from_name" class="form-control" required>
+                        <div class="relative pl-6">
+                            <div class="absolute -left-[6.5px] top-1 w-3 h-3 rounded-full bg-primary ring-4 ring-gray-50 dark:ring-gray-900 transition-colors duration-500"></div>
+                            <span class="text-xs font-mono mb-1 block text-primary">2023 - Present</span>
+                            <h4 class="text-lg font-bold text-gray-900 dark:text-slate-100">M.S. Data Science</h4>
+                            <p class="text-subtle text-sm">University of Technology. Focus on NLP and Cloud Computing.</p>
                         </div>
-                        <div class="form-group">
-                            <label for="from_email">Email</label>
-                            <input type="email" id="from_email" name="from_email" class="form-control" required>
+
+                        <div class="relative pl-6">
+                            <div class="absolute -left-[6.5px] top-1 w-3 h-3 rounded-full bg-secondary ring-4 ring-gray-50 dark:ring-gray-900 transition-colors duration-500"></div>
+                            <span class="text-xs font-mono mb-1 block text-secondary">Summer 2023</span>
+                            <h4 class="text-lg font-bold text-gray-900 dark:text-slate-100">Data Analyst Intern</h4>
+                            <p class="text-subtle text-sm">TechCorp. Optimized data pipelines for better performance.</p>
                         </div>
-                        <div class="form-group full-width">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" class="form-control" required></textarea>
-                        </div>
-                        <div class="form-group full-width" style="text-align: center;">
-                            <button type="submit" class="btn btn-primary" id="submit-btn">Send Message</button>
-                        </div>
-                    </form>
-                    
-                    <div class="contact-socials fade-in" style="transition-delay: 300ms;">
-                        <a href="#" class="social-icon" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M20.5 2h-17A1.5 1.5 0 002 3.5v17A1.5 1.5 0 003.5 22h17a1.5 1.5 0 001.5-1.5v-17A1.5 1.5 0 0020.5 2zM8 19H5v-9h3zM6.5 8.25A1.75 1.75 0 118.25 6.5 1.75 1.75 0 016.5 8.25zM19 19h-3v-4.74c0-1.42-.6-1.93-1.38-1.93A1.74 1.74 0 0013 14.19a.66.66 0 000 .14V19h-3v-9h2.9v1.3a3.11 3.11 0 012.7-1.4c1.55 0 3.36.96 3.36 3.66z"></path></svg>
-                        </a>
-                        <a href="#" class="social-icon" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.165 6.839 9.489.5.09.682-.218.682-.484 0-.238-.009-.868-.013-1.703-2.782.604-3.369-1.342-3.369-1.342-.454-1.157-1.11-1.465-1.11-1.465-.908-.62.069-.608.069-.608 1.003.07 1.531 1.03 1.531 1.03.892 1.53 2.341 1.088 2.91.832.091-.647.349-1.088.636-1.338-2.22-.253-4.555-1.11-4.555-4.949 0-1.09.39-1.984.029-2.684-.103-.253-.464-1.27.022-2.646 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.82c.85.004 1.705.114 2.504.336 1.909-1.296 2.747-1.026 2.747-1.026.486 1.376.125 2.393.023 2.646.64.7.029 1.595.029 2.684 0 3.848-2.339 4.693-4.566 4.942.359.309.678.92.678 1.856 0 1.338-.012 2.419-.012 2.746 0 .268.18.578.688.48A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd"></path></svg>
-                        </a>
-                        <a href="#" class="social-icon" aria-label="Kaggle" target="_blank" rel="noopener noreferrer">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M15.405 16.35l-2.071-2.072 2.071-2.071c.14-.14.19-.33.13-.51-.05-.18-.2-.31-.39-.31h-2.14v-2.14c0-.19-.13-.34-.31-.39-.18-.05-.37 0-.51.13l-2.071 2.071L8.03 8.98c-.14-.14-.33-.19-.51-.13-.18.05-.31.2-.31.39v2.14H5.07c-.19 0-.34.13-.39.31-.05.18 0 .37.13.51l2.071 2.071-2.071 2.071c-.14.14-.19.33-.13.51.05.18.2.31.39.31h2.14v2.14c0 .19.13.34.31.39.18.05.37 0 .51-.13l2.071-2.071 2.071 2.071c.14.14.33.19.51.13.18-.05.31-.2.31-.39v-2.14h2.14c.19 0 .34-.13.39-.31.05-.18 0 .37-.13-.51zM2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10S2 17.523 2 12z"></input>
-                        </a>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-    </main>
-    
-    <footer class="footer">
-        <p>
-            © 2025 Alex Chen. Built with <span class="heart" aria-label="love">❤️</span> on GitHub Pages.
-        </p>
+    <!-- Projects Section -->
+    <section id="projects" class="py-20">
+        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4 text-gray-900 dark:text-slate-100">Portfolio Highlights</h2>
+                <p class="text-subtle text-lg">Showcasing my capability in solving complex data problems.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Project 1 -->
+                <article class="card p-6 rounded-xl hover:shadow-lg hover:shadow-primary/20 transition-all duration-300 transform hover:-translate-y-0.5 flex flex-col h-full">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fas fa-chart-line text-2xl text-primary" aria-hidden="true"></i>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white transition-colors duration-500">E-Commerce Sales Predictor</h3>
+                    </div>
+                    <p class="text-subtle text-sm mb-4 flex-grow w-full overflow-hidden">
+                        Developed a time-series model (ARIMA/Prophet) to forecast weekly sales for a retail chain, achieving 94% accuracy and optimizing inventory.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-auto" role="list">
+                        <span class="text-xs font-mono text-primary bg-blue-100 dark:bg-blue-900/30 px-2 py-1 rounded" role="listitem">Prophet</span>
+                        <span class="text-xs font-mono text-primary bg-blue-100 dark:bg-blue-900/30 px-2 py-1 rounded" role="listitem">SQL</span>
+                        <span class="text-xs font-mono text-primary bg-blue-100 dark:bg-blue-900/30 px-2 py-1 rounded" role="listitem">Plotly</span>
+                    </div>
+                    <a href="https://github.com/AlexChenDS/sales-predictor" target="_blank" rel="noopener noreferrer" class="mt-4 text-primary hover:text-blue-700 font-semibold text-sm flex items-center gap-2 touch-manipulation" aria-label="View E-Commerce Sales Predictor code on GitHub">
+                        View Code <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+                    </a>
+                </article>
+
+                <!-- Project 2 -->
+                <article class="card p-6 rounded-xl hover:shadow-lg hover:shadow-secondary/20 transition-all duration-300 transform hover:-translate-y-0.5 flex flex-col h-full">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fas fa-robot text-2xl text-secondary" aria-hidden="true"></i>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white transition-colors duration-500">NLP Job Recommender</h3>
+                    </div>
+                    <p class="text-subtle text-sm mb-4 flex-grow w-full overflow-hidden">
+                        Created a system using vector embeddings (BERT) to match user resumes to the most relevant job postings based on skill similarity.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-auto" role="list">
+                        <span class="text-xs font-mono text-secondary bg-green-100 dark:bg-green-900/30 px-2 py-1 rounded" role="listitem">BERT</span>
+                        <span class="text-xs font-mono text-secondary bg-green-100 dark:bg-green-900/30 px-2 py-1 rounded" role="listitem">PyTorch</span>
+                        <span class="text-xs font-mono text-secondary bg-green-100 dark:bg-green-900/30 px-2 py-1 rounded" role="listitem">Streamlit</span>
+                    </div>
+                    <a href="https://github.com/AlexChenDS/nlp-recommender" target="_blank" rel="noopener noreferrer" class="mt-4 text-primary hover:text-blue-700 font-semibold text-sm flex items-center gap-2 touch-manipulation" aria-label="View NLP Job Recommender code on GitHub">
+                        View Code <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+                    </a>
+                </article>
+
+                <!-- Project 3 -->
+                <article class="card p-6 rounded-xl hover:shadow-lg hover:shadow-indigo-500/20 transition-all duration-300 transform hover:-translate-y-0.5 flex flex-col h-full">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i class="fas fa-cloud text-2xl text-indigo-500" aria-hidden="true"></i>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white transition-colors duration-500">Cloud Data Pipeline</h3>
+                    </div>
+                    <p class="text-subtle text-sm mb-4 flex-grow w-full overflow-hidden">
+                        Implemented a scalable ETL pipeline using AWS (S3, Lambda, Redshift) to process millions of log entries daily for real-time analytics.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-auto" role="list">
+                        <span class="text-xs font-mono text-indigo-500 bg-indigo-100 dark:bg-indigo-900/30 px-2 py-1 rounded" role="listitem">AWS</span>
+                        <span class="text-xs font-mono text-indigo-500 bg-indigo-100 dark:bg-indigo-900/30 px-2 py-1 rounded" role="listitem">Docker</span>
+                        <span class="text-xs font-mono text-indigo-500 bg-indigo-100 dark:bg-indigo-900/30 px-2 py-1 rounded" role="listitem">Airflow</span>
+                    </div>
+                    <a href="https://github.com/AlexChenDS/cloud-pipeline" target="_blank" rel="noopener noreferrer" class="mt-4 text-primary hover:text-blue-700 font-semibold text-sm flex items-center gap-2 touch-manipulation" aria-label="View Cloud Data Pipeline code on GitHub">
+                        View Code <i class="fas fa-arrow-right text-xs" aria-hidden="true"></i>
+                    </a>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 bg-gray-50 dark:bg-gray-900 transition-colors duration-500">
+        <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="text-3xl font-bold mb-6 text-gray-900 dark:text-slate-100">Let's Collaborate</h2>
+            <p class="text-subtle mb-10">
+                Have a project idea, internship opportunity, or just want to chat about Python? Reach out!
+            </p>
+
+            <form id="contactForm" class="max-w-md mx-auto space-y-5 text-left" novalidate>
+                <input type="text" id="name" placeholder="Your Name" required class="w-full card px-4 py-3 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary" aria-label="Your Name">
+                <input type="email" id="email" placeholder="Your Email" required class="w-full card px-4 py-3 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary" aria-label="Your Email">
+                <textarea rows="4" id="message" placeholder="Your Message" required class="w-full card px-4 py-3 text-gray-900 dark:text-white rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary" aria-label="Your Message"></textarea>
+                
+                <button type="submit" id="submit-btn" class="w-full bg-primary hover:bg-blue-700 text-white font-bold py-3 rounded-xl transition-all duration-300 transform hover:-translate-y-0.5 shadow-lg shadow-blue-500/40 touch-manipulation">
+                    Send Message
+                </button>
+            </form>
+            
+            <div id="formSuccess" class="hidden mt-6 p-4 bg-green-100 dark:bg-green-900/30 border border-green-300 dark:border-green-700 text-green-700 dark:text-green-400 rounded-lg max-w-md mx-auto" role="alert" aria-live="polite">
+                Message sent successfully! I will be in touch soon.
+            </div>
+
+            <div id="formError" class="hidden mt-6 p-4 bg-red-100 dark:bg-red-900/30 border border-red-300 dark:border-red-700 text-red-700 dark:text-red-400 rounded-lg max-w-md mx-auto" role="alert" aria-live="polite">
+                Please check your input and try again.
+            </div>
+
+            <div class="mt-12 flex justify-center space-x-8">
+                <a href="https://linkedin.com/in/alexchen-ds" target="_blank" rel="noopener noreferrer" class="text-gray-500 dark:text-slate-400 hover:text-primary transition-colors text-2xl touch-manipulation" aria-label="LinkedIn Profile"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+                <a href="https://github.com/AlexChenDS" target="_blank" rel="noopener noreferrer" class="text-gray-500 dark:text-slate-400 hover:text-primary transition-colors text-2xl touch-manipulation" aria-label="GitHub Profile"><i class="fab fa-github" aria-hidden="true"></i></a>
+                <a href="mailto:alex@chen-ds.com" class="text-gray-500 dark:text-slate-400 hover:text-primary transition-colors text-2xl touch-manipulation" aria-label="Email Alex"><i class="fas fa-envelope" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-8 border-t border-gray-100 dark:border-slate-800 bg-white dark:bg-black transition-colors duration-500">
+        <div class="max-w-6xl mx-auto px-4 text-center text-subtle text-sm">
+            <p id="footer-year">&copy; 2024 Alex Chen. Data Science Portfolio. | Made with Blue & Code.</p>
+        </div>
     </footer>
 
-    <a href="#hero" class="back-to-top" id="back-to-top" aria-label="Back to top">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
-        </svg>
-    </a>
-    
-    <div class="toast" id="toast-notification">
-        Message sent successfully!
-    </div>
-
-
-    <script src="script.js" defer></script>
-    
+    <!-- JS Link -->
+    <script src="script.js"></script>
 </body>
 </html>

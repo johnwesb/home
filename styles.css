@@ -1,0 +1,107 @@
+/* BASE STYLES for reusable components */
+
+/* Scroll-padding-top to prevent fixed navbar overlap on anchor navigation */
+html {
+    scroll-padding-top: 5rem;
+}
+
+/* Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-snap-type: none !important;
+    }
+    .cursor {
+        animation: none;
+    }
+    .animate-bounce {
+        animation: none;
+    }
+    .transform {
+        transform: none !important;
+    }
+}
+
+/* Card styling */
+.card {
+    background-color: white;
+    color: rgb(17 24 39);
+}
+
+.dark .card {
+    background-color: rgb(15 23 42);
+    border-color: rgb(51 65 85);
+    color: rgb(248 250 252);
+}
+
+.card {
+    border-color: rgb(229 231 235);
+    border-width: 1px;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 500ms;
+}
+
+/* Subtle text */
+.text-subtle {
+    color: rgb(75 85 99);
+}
+
+.dark .text-subtle {
+    color: rgb(148 163 184);
+}
+
+.text-subtle {
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 500ms;
+}
+
+/* Navigation background */
+.nav-bg {
+    background-color: white;
+    border-bottom-color: rgb(243 244 246);
+}
+
+.dark .nav-bg {
+    background-color: rgb(0 0 0);
+    border-bottom-color: rgb(7 7 7);
+}
+
+.nav-bg {
+    border-bottom-width: 1px;
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 500ms;
+}
+
+/* Gradient Text */
+.text-gradient {
+    background: linear-gradient(to right, #3b82f6, #10b981);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Typing cursor */
+.cursor {
+    display: inline-block;
+    width: 3px;
+    background-color: #10b981;
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Prevent typing text overflow on narrow screens */
+#typing-text {
+    word-break: break-word;
+    hyphens: auto;
+    overflow-wrap: break-word;
+}
