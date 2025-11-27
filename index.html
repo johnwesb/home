@@ -1,174 +1,135 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
   <title>[Your Name] — Data Science Portfolio</title>
-  <meta name="description" content="Portfolio of [Your Name], a data science developer, built in minimalist Aero Glass style.">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Segoe+UI:wght@700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <meta name="description" content="[Your Name]'s Data Science Portfolio: modern minimalist with liquid glass design.">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Syne:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
   <header class="site-header">
-    <div class="container header-inner">
-      <span class="logo glossy-title">[Your Name]</span>
-      <nav class="nav" aria-label="Site">
-        <a href="#about" class="nav-link" tabindex="1"><span class="nav-icon" aria-hidden="true">
-          <!-- Home SVG -->
-          <svg width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" viewBox="0 0 24 24"><path d="M4 12L12 5l8 7v7a2 2 0 0 1-2 2h-3.5V15h-3v4H6a2 2 0 0 1-2-2z"/><path d="M9 21V15h6v6"/></svg>
-        </span>About</a>
-        <a href="#projects" class="nav-link" tabindex="2"><span class="nav-icon" aria-hidden="true">
-          <!-- Chart Bar SVG -->
-          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="4" height="6" rx="1"/><rect x="8" y="7" width="4" height="10" rx="1"/><rect x="13" y="4" width="4" height="13" rx="1"/></svg>
-        </span>Projects</a>
-        <a href="#contact" class="nav-link" tabindex="3"><span class="nav-icon" aria-hidden="true">
-          <!-- Envelope SVG -->
-          <svg width="20" height="20" stroke="currentColor" stroke-width="2" fill="none" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M3 8l9 7 9-7"></path></svg>
-        </span>Contact</a>
-        <button id="theme-toggle" class="theme-toggle nav-link" title="Toggle dark/light mode" aria-label="Toggle dark/light mode" tabindex="4">
-          <span class="nav-icon" id="theme-icon" aria-hidden="true"></span>
+    <div class="container flex header-inner">
+      <span class="logo wordmark">[Your Name]</span>
+      <nav class="main-nav" aria-label="Main">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#contact" class="nav-link">Contact</a>
+        <button id="mode-toggle" class="mode-toggle" aria-label="Toggle dark/light mode" title="Toggle Theme">
+          <span id="mode-icon"></span>
         </button>
       </nav>
     </div>
   </header>
   <main>
-    <!-- HERO/ABOUT -->
-    <section id="about" class="section glass-card hero" aria-label="About">
-      <div class="hero-texts">
-        <h1 class="vista-header fade-up">Hi, I'm <span class="accent">[Your Name]</span>, a data science developer passionate about extracting insights from data using Python, machine learning, and advanced analytics.</h1>
-        <p class="hero-tagline fade-up">
-          Transforming raw data into actionable intelligence through innovative models and visualizations.
-        </p>
-        <a href="#contact" class="cta fade-up" tabindex="5">Contact Me</a>
-      </div>
-      <div class="skills-glass fade-up">
-        <h2 class="skills-title">Skills</h2>
-        <ul class="skills-list">
-          <li>Python</li>
-          <li>Pandas</li>
-          <li>Scikit-learn</li>
-          <li>TensorFlow</li>
-          <li>Tableau</li>
-          <li>SQL</li>
-          <li>Git</li>
-        </ul>
+    <!-- HERO + SKILLS -->
+    <section id="about" class="hero-section glassy fadein">
+      <div class="hero-content">
+        <h1 class="hero-title">Data Science, Beautifully Minimal</h1>
+        <span class="hero-subtext">Hi, I'm <strong>[Your Name]</strong> — I build insight-driven products using modern Machine Learning, Python, and elegant analytics.</span>
+        <div class="skills-chips">
+          <span class="chip">Python</span>
+          <span class="chip">Pandas</span>
+          <span class="chip">Scikit-learn</span>
+          <span class="chip">TensorFlow</span>
+          <span class="chip">SQL</span>
+          <span class="chip">Tableau</span>
+          <span class="chip">Git</span>
+          <span class="chip">Data Viz</span>
+        </div>
+        <a href="#contact" class="cta-btn">Contact Me</a>
       </div>
     </section>
-    <!-- PROJECTS -->
-    <section id="projects" class="section glass-card" aria-label="Projects">
-      <h2 class="vista-header fade-up">Projects</h2>
-      <div class="projects-grid">
-        <div class="project-card glass-tile fade-up">
-          <div class="project-img-wrap ripple-target">
-            <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=400&q=80" alt="Predictive Sales Model cover" width="400" height="250" loading="lazy" />
+    <!-- PROJECTS GRID -->
+    <section id="projects" class="glass-section section fadein">
+      <h2 class="section-title">Selected Projects</h2>
+      <div class="proj-grid">
+        <div class="proj-card">
+          <div class="proj-imgcover">
+            <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=480&q=80" alt="Predictive Sales Model" width="400" height="250"/>
+            <div class="glass-tile"></div>
           </div>
-          <div class="project-content">
+          <div class="proj-info">
             <h3>Predictive Sales Model</h3>
-            <p>Python, Scikit-learn &ndash; Time-series forecasting achieving 92% accuracy.</p>
-            <ul class="project-bullets">
-              <li>Integrated ARIMA, moving averages for robust trends</li>
-              <li>Live dashboard with forecast metrics</li>
+            <p class="proj-sub">Python, Scikit-learn — 92% accuracy time-series forecasting</p>
+            <ul>
+              <li>Integrated ARIMA and dashboards</li>
+              <li>Automated pipeline, live metrics</li>
             </ul>
-            <a href="https://github.com/yourgithub/predictive-sales-model" target="_blank" rel="noopener" class="project-link" aria-label="GitHub - Predictive Sales Model">
-              <span class="icon-github" aria-hidden="true">
-                <!-- GitHub SVG -->
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7">
-                  <path d="M12 2C6.477 2 2 6.484 2 12.021c0 4.422 2.865 8.168 6.839 9.504.5.09.68-.217.68-.483 0-.238-.009-.868-.014-1.703-2.782.605-3.37-1.342-3.37-1.342-.454-1.158-1.109-1.467-1.109-1.467-.907-.62.069-.608.069-.608 1.003.071 1.531 1.031 1.531 1.031.892 1.53 2.341 1.088 2.91.833.092-.647.35-1.088.636-1.338-2.221-.253-4.555-1.113-4.555-4.954 0-1.094.39-1.988 1.029-2.688-.103-.254-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.54 9.54 0 0112 6.796c.85.004 1.705.115 2.504.338 1.91-1.295 2.749-1.025 2.749-1.025.545 1.378.202 2.396.1 2.65.64.7 1.028 1.594 1.028 2.688 0 3.848-2.337 4.698-4.565 4.946.359.309.679.921.679 1.857 0 1.34-.012 2.42-.012 2.75 0 .268.18.577.688.48A10.025 10.025 0 0022 12.021C22 6.484 17.523 2 12 2z" fill="currentColor"/></svg>
-              </span>
-              <span>GitHub</span>
+            <a class="plain-icon" href="https://github.com/yourgithub/predictive-sales-model" target="_blank" aria-label="GitHub - Predictive Sales Model">
+              <!-- GitHub SVG -->
+              <svg viewBox="0 0 24 24" fill="none" width="22" height="22" stroke="currentColor" stroke-width="2"><path d="M12 2C6.477 2 2 6.484 2 12.021c0 4.422 2.865 8.168 6.839 9.504.5.09.68-.217.68-.483 0-.238-.009-.868-.014-1.703-2.782.605-3.37-1.342-3.37-1.342-.454-1.158-1.109-1.467-1.109-1.467-.907-.62.069-.608.069-.608 1.003.071 1.531 1.031 1.531 1.031.892 1.53 2.341 1.088 2.91.833.092-.647.35-1.088.636-1.338-2.221-.253-4.555-1.113-4.555-4.954 0-1.094.39-1.988 1.029-2.688-.103-.254-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.54 9.54 0 0112 6.796c.85.004 1.705.115 2.504.338 1.91-1.295 2.749-1.025 2.749-1.025.545 1.378.202 2.396.1 2.65.64.7 1.028 1.594 1.028 2.688 0 3.848-2.337 4.698-4.565 4.946.359.309.679.921.679 1.857 0 1.34-.012 2.42-.012 2.75 0 .268.18.577.688.48A10.025 10.025 0 0022 12.021C22 6.484 17.523 2 12 2z" fill="currentColor"/></svg>
             </a>
           </div>
         </div>
-        <div class="project-card glass-tile fade-up">
-          <div class="project-img-wrap ripple-target">
-            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80" alt="Customer Segmentation Dashboard cover" width="400" height="250" loading="lazy" />
+        <div class="proj-card">
+          <div class="proj-imgcover">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=480&q=80" alt="Customer Segmentation Dashboard" width="400" height="250"/>
+            <div class="glass-tile"></div>
           </div>
-          <div class="project-content">
+          <div class="proj-info">
             <h3>Customer Segmentation Dashboard</h3>
-            <p>Tableau, Pandas &ndash; K-means clustering for 1M+ records.</p>
-            <ul class="project-bullets">
-              <li>Quantified ROI from tailored campaigns</li>
-              <li>Interactive filters for dynamic insights</li>
+            <p class="proj-sub">Tableau, Pandas — K-means clustering for 1M+ records</p>
+            <ul>
+              <li>ROI analytics, campaign targeting</li>
+              <li>Interactive filters, real-time drilldown</li>
             </ul>
-            <a href="https://github.com/yourgithub/customer-segmentation-dashboard" target="_blank" rel="noopener" class="project-link" aria-label="GitHub - Customer Segmentation Dashboard">
-              <span class="icon-github" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7">
-                  <path d="M12 2C6.477 2 2 6.484 2 12.021c0 4.422 2.865 8.168 6.839 9.504.5.09.68-.217.68-.483 0-.238-.009-.868-.014-1.703-2.782.605-3.37-1.342-3.37-1.342-.454-1.158-1.109-1.467-1.109-1.467-.907-.62.069-.608.069-.608 1.003.071 1.531 1.031 1.531 1.031.892 1.53 2.341 1.088 2.91.833.092-.647.35-1.088.636-1.338-2.221-.253-4.555-1.113-4.555-4.954 0-1.094.39-1.988 1.029-2.688-.103-.254-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.54 9.54 0 0112 6.796c.85.004 1.705.115 2.504.338 1.91-1.295 2.749-1.025 2.749-1.025.545 1.378.202 2.396.1 2.65.64.7 1.028 1.594 1.028 2.688 0 3.848-2.337 4.698-4.565 4.946.359.309.679.921.679 1.857 0 1.34-.012 2.42-.012 2.75 0 .268.18.577.688.48A10.025 10.025 0 0022 12.021C22 6.484 17.523 2 12 2z" fill="currentColor"/></svg>
-              </span>
-              <span>GitHub</span>
+            <a class="plain-icon" href="https://github.com/yourgithub/customer-segmentation-dashboard" target="_blank" aria-label="GitHub - Customer Segmentation Dashboard">
+              <svg viewBox="0 0 24 24" fill="none" width="22" height="22" stroke="currentColor" stroke-width="2"><path d="M12 2C6.477 2 2 6.484 2 12.021c0 4.422 2.865 8.168 6.839 9.504.5.09.68-.217.68-.483 0-.238-.009-.868-.014-1.703-2.782.605-3.37-1.342-3.37-1.342-.454-1.158-1.109-1.467-1.109-1.467-.907-.62.069-.608.069-.608 1.003.071 1.531 1.031 1.531 1.031.892 1.53 2.341 1.088 2.91.833.092-.647.35-1.088.636-1.338-2.221-.253-4.555-1.113-4.555-4.954 0-1.094.39-1.988 1.029-2.688-.103-.254-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.54 9.54 0 0112 6.796c.85.004 1.705.115 2.504.338 1.91-1.295 2.749-1.025 2.749-1.025.545 1.378.202 2.396.1 2.65.64.7 1.028 1.594 1.028 2.688 0 3.848-2.337 4.698-4.565 4.946.359.309.679.921.679 1.857 0 1.34-.012 2.42-.012 2.75 0 .268.18.577.688.48A10.025 10.025 0 0022 12.021C22 6.484 17.523 2 12 2z" fill="currentColor"/></svg>
             </a>
           </div>
         </div>
-        <div class="project-card glass-tile fade-up">
-          <div class="project-img-wrap ripple-target">
-            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=400&q=80" alt="NLP Sentiment Analyzer cover" width="400" height="250" loading="lazy" />
+        <div class="proj-card">
+          <div class="proj-imgcover">
+            <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=480&q=80" alt="NLP Sentiment Analyzer" width="400" height="250"/>
+            <div class="glass-tile"></div>
           </div>
-          <div class="project-content">
+          <div class="proj-info">
             <h3>NLP Sentiment Analyzer</h3>
-            <p>TensorFlow, NLTK &ndash; BERT-based tool processing 10K reviews/sec.</p>
-            <ul class="project-bullets">
-              <li>F1-score 0.89 on benchmark datasets</li>
-              <li>Production API deployment (REST)</li>
+            <p class="proj-sub">TensorFlow, NLTK — Real-time BERT, 10K reviews/sec</p>
+            <ul>
+              <li>F1-score 0.89, RESTful deployment</li>
+              <li>Live dashboard, metrics API</li>
             </ul>
-            <a href="https://github.com/yourgithub/nlp-sentiment-analyzer" target="_blank" rel="noopener" class="project-link" aria-label="GitHub - NLP Sentiment Analyzer">
-              <span class="icon-github" aria-hidden="true">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7">
-                  <path d="M12 2C6.477 2 2 6.484 2 12.021c0 4.422 2.865 8.168 6.839 9.504.5.09.68-.217.68-.483 0-.238-.009-.868-.014-1.703-2.782.605-3.37-1.342-3.37-1.342-.454-1.158-1.109-1.467-1.109-1.467-.907-.62.069-.608.069-.608 1.003.071 1.531 1.031 1.531 1.031.892 1.53 2.341 1.088 2.91.833.092-.647.35-1.088.636-1.338-2.221-.253-4.555-1.113-4.555-4.954 0-1.094.39-1.988 1.029-2.688-.103-.254-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.54 9.54 0 0112 6.796c.85.004 1.705.115 2.504.338 1.91-1.295 2.749-1.025 2.749-1.025.545 1.378.202 2.396.1 2.65.64.7 1.028 1.594 1.028 2.688 0 3.848-2.337 4.698-4.565 4.946.359.309.679.921.679 1.857 0 1.34-.012 2.42-.012 2.75 0 .268.18.577.688.48A10.025 10.025 0 0022 12.021C22 6.484 17.523 2 12 2z" fill="currentColor"/></svg>
-              </span>
-              <span>GitHub</span>
+            <a class="plain-icon" href="https://github.com/yourgithub/nlp-sentiment-analyzer" target="_blank" aria-label="GitHub - NLP Sentiment Analyzer">
+              <svg viewBox="0 0 24 24" fill="none" width="22" height="22" stroke="currentColor" stroke-width="2"><path d="M12 2C6.477 2 2 6.484 2 12.021c0 4.422 2.865 8.168 6.839 9.504.5.09.68-.217.68-.483 0-.238-.009-.868-.014-1.703-2.782.605-3.37-1.342-3.37-1.342-.454-1.158-1.109-1.467-1.109-1.467-.907-.62.069-.608.069-.608 1.003.071 1.531 1.031 1.531 1.031.892 1.53 2.341 1.088 2.91.833.092-.647.35-1.088.636-1.338-2.221-.253-4.555-1.113-4.555-4.954 0-1.094.39-1.988 1.029-2.688-.103-.254-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.54 9.54 0 0112 6.796c.85.004 1.705.115 2.504.338 1.91-1.295 2.749-1.025 2.749-1.025.545 1.378.202 2.396.1 2.65.64.7 1.028 1.594 1.028 2.688 0 3.848-2.337 4.698-4.565 4.946.359.309.679.921.679 1.857 0 1.34-.012 2.42-.012 2.75 0 .268.18.577.688.48A10.025 10.025 0 0022 12.021C22 6.484 17.523 2 12 2z" fill="currentColor"/></svg>
             </a>
           </div>
         </div>
       </div>
     </section>
     <!-- CONTACT -->
-    <section id="contact" class="section glass-card" aria-label="Contact">
-      <h2 class="vista-header fade-up">Contact</h2>
-      <div class="contact-links-group">
-        <div class="contact-link-block fade-up">
-          <a href="mailto:youremail@example.com" class="contact-link" aria-label="Email">
-            <span class="nav-icon">
-              <!-- Envelope SVG -->
-              <svg width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 8l9 7 9-7"/></svg>
-            </span>
-            Email
-          </a>
-          <div class="contact-blurb">Share project ideas or discuss collaboration opportunities via email.</div>
-        </div>
-        <div class="contact-link-block fade-up">
-          <a href="https://linkedin.com/in/yourlinkedin" target="_blank" rel="noopener" class="contact-link" aria-label="LinkedIn">
-            <span class="nav-icon">
-              <!-- LinkedIn SVG -->
-              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <rect x="2.5" y="2.5" width="19" height="19" rx="3" />
-                <path d="M7.5 8.5v7" />
-                <circle cx="7.5" cy="6.5" r="1" />
-                <path d="M12 15.5v-3a2 2 0 0 1 4 0v3" />
-              </svg>
-            </span>
-            LinkedIn
-          </a>
-          <div class="contact-blurb">Connect for professional networking and industry insights.</div>
-        </div>
-        <div class="contact-link-block fade-up">
-          <a href="https://github.com/yourgithub" target="_blank" rel="noopener" class="contact-link" aria-label="GitHub">
-            <span class="icon-github" aria-hidden="true">
-              <!-- GitHub SVG -->
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.7">
-                <path d="M12 2C6.477 2 2 6.484 2 12.021c0 4.422 2.865 8.168 6.839 9.504.5.09.68-.217.68-.483 0-.238-.009-.868-.014-1.703-2.782.605-3.37-1.342-3.37-1.342-.454-1.158-1.109-1.467-1.109-1.467-.907-.62.069-.608.069-.608 1.003.071 1.531 1.031 1.531 1.031.892 1.53 2.341 1.088 2.91.833.092-.647.35-1.088.636-1.338-2.221-.253-4.555-1.113-4.555-4.954 0-1.094.39-1.988 1.029-2.688-.103-.254-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.54 9.54 0 0112 6.796c.85.004 1.705.115 2.504.338 1.91-1.295 2.749-1.025 2.749-1.025.545 1.378.202 2.396.1 2.65.64.7 1.028 1.594 1.028 2.688 0 3.848-2.337 4.698-4.565 4.946.359.309.679.921.679 1.857 0 1.34-.012 2.42-.012 2.75 0 .268.18.577.688.48A10.025 10.025 0 0022 12.021C22 6.484 17.523 2 12 2z" fill="currentColor"/></svg>
-            </span>
-            GitHub
-          </a>
-          <div class="contact-blurb">Explore project source code and data science repositories.</div>
-        </div>
+    <section id="contact" class="glass-section section fadein">
+      <h2 class="section-title">Contact</h2>
+      <div class="contact-row">
+        <a href="mailto:youremail@example.com" class="contact-card" aria-label="Email">
+          <span class="contact-icon">
+            <svg width="22" height="22" stroke="currentColor" stroke-width="2" fill="none" viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M3 8l9 7 9-7"></path></svg>
+          </span>
+          <span class="contact-label">Email</span>
+          <span class="contact-desc">Share ideas or discuss a project.</span>
+        </a>
+        <a href="https://linkedin.com/in/yourlinkedin" target="_blank" rel="noopener" class="contact-card" aria-label="LinkedIn">
+          <span class="contact-icon">
+            <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2.5" y="2.5" width="19" height="19" rx="3" /><path d="M7.5 8.5v7" /><circle cx="7.5" cy="6.5" r="1" /><path d="M12 15.5v-3a2 2 0 0 1 4 0v3"/></svg>
+          </span>
+          <span class="contact-label">LinkedIn</span>
+          <span class="contact-desc">Connect for opportunities.</span>
+        </a>
+        <a href="https://github.com/yourgithub" target="_blank" rel="noopener" class="contact-card" aria-label="GitHub">
+          <span class="contact-icon">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2C6.477 2 2 6.484 2 12.021c0 4.422 2.865 8.168 6.839 9.504.5.09.68-.217.68-.483 0-.238-.009-.868-.014-1.703-2.782.605-3.37-1.342-3.37-1.342-.454-1.158-1.109-1.467-1.109-1.467-.907-.62.069-.608.069-.608 1.003.071 1.531 1.031 1.531 1.031.892 1.53 2.341 1.088 2.91.833.092-.647.35-1.088.636-1.338-2.221-.253-4.555-1.113-4.555-4.954 0-1.094.39-1.988 1.029-2.688-.103-.254-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.54 9.54 0 0112 6.796c.85.004 1.705.115 2.504.338 1.91-1.295 2.749-1.025 2.749-1.025.545 1.378.202 2.396.1 2.65.64.7 1.028 1.594 1.028 2.688 0 3.848-2.337 4.698-4.565 4.946.359.309.679.921.679 1.857 0 1.34-.012 2.42-.012 2.75 0 .268.18.577.688.48A10.025 10.025 0 0022 12.021C22 6.484 17.523 2 12 2z" fill="currentColor"/></svg>
+          </span>
+          <span class="contact-label">GitHub</span>
+          <span class="contact-desc">See more of my code.</span>
+        </a>
       </div>
-      <div class="contact-tagline fade-up">
-        Eager to tackle data challenges? Let's discuss potential collaborations.
-      </div>
+      <div class="contact-tagline">Open to data-driven collaborations.</div>
     </section>
   </main>
-  <footer class="site-footer" role="contentinfo">
-    <small>&copy; 2025 [Your Name]. Minimal Aero Glass Portfolio. All Rights Reserved.</small>
+  <footer class="site-footer">
+    <small>&copy; 2025 [Your Name]. Minimalist Liquid Glass Portfolio.</small>
   </footer>
   <script src="script.js"></script>
 </body>
