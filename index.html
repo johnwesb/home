@@ -2,606 +2,112 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>~ user_data // scientist ~</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
-    
-    <style>
-        /* FONTS */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap');
-
-        /* --- THEME VARIABLES --- */
-        :root {
-            /* Default to Dark Mode (Soft Club) variables first */
-            --bg-grad-start: #020617;
-            --bg-grad-mid: #0f172a;
-            --bg-grad-end: #1e3a8a;
-            --text-main: #e2e8f0;
-            --text-muted: #94a3b8;
-            --glass-bg: rgba(15, 23, 42, 0.6);
-            --glass-border: rgba(255, 255, 255, 0.1);
-            --glass-highlight: rgba(255, 255, 255, 0.05);
-            --accent-primary: #22d3ee; /* Cyan */
-            --accent-secondary: #818cf8; /* Indigo */
-            --scanline-opacity: 0.2;
-            --noise-opacity: 0.05;
-            --data-node-color: #22d3ee;
-        }
-
-        /* Light Mode Overrides (Frutiger Aero) */
-        body.light-theme {
-            --bg-grad-start: #e0f2fe;
-            --bg-grad-mid: #bae6fd;
-            --bg-grad-end: #7dd3fc;
-            --text-main: #0f172a;
-            --text-muted: #475569;
-            --glass-bg: rgba(255, 255, 255, 0.4);
-            --glass-border: rgba(255, 255, 255, 0.6);
-            --glass-highlight: rgba(255, 255, 255, 0.4);
-            --accent-primary: #0284c7; /* Dark Blue */
-            --accent-secondary: #0ea5e9; /* Sky Blue */
-            --scanline-opacity: 0.03; /* Barely visible in day */
-            --noise-opacity: 0.02;
-            --data-node-color: #0284c7;
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-grad-start);
-            color: var(--text-main);
-            overflow-x: hidden;
-            transition: color 0.5s ease, background-color 0.5s ease;
-        }
-
-        /* --- BACKGROUNDS --- */
-        #bg-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -3;
-            background: linear-gradient(180deg, var(--bg-grad-start) 0%, var(--bg-grad-mid) 50%, var(--bg-grad-end) 100%);
-            transition: background 1s ease;
-        }
-
-        .noise-overlay {
-            position: fixed;
-            inset: 0;
-            z-index: -2;
-            opacity: var(--noise-opacity);
-            pointer-events: none;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-            transition: opacity 1s ease;
-        }
-
-        .scanlines {
-            position: fixed;
-            inset: 0;
-            z-index: -1;
-            background: linear-gradient(to bottom, rgba(0,0,0,0), rgba(0,0,0,0) 50%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.5));
-            background-size: 100% 4px;
-            pointer-events: none;
-            opacity: var(--scanline-opacity);
-            transition: opacity 1s ease;
-        }
-
-        /* --- GLASS PANELS --- */
-        .glass-panel {
-            background: var(--glass-bg);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--glass-border);
-            border-top: 1px solid var(--glass-highlight);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1);
-            border-radius: 16px;
-            overflow: hidden;
-            transition: background 0.5s ease, border-color 0.5s ease;
-        }
-
-        /* --- TYPOGRAPHY & UTILS --- */
-        .font-mono { font-family: 'JetBrains Mono', monospace; }
-        
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 3px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--accent-primary); }
-
-        /* --- NAVIGATION --- */
-        .nav-btn {
-            transition: all 0.2s ease;
-            color: var(--text-muted);
-            border-bottom: 2px solid transparent;
-        }
-        .nav-btn:hover {
-            background: var(--glass-highlight);
-            color: var(--text-main);
-        }
-        .nav-btn.active {
-            background: var(--glass-highlight);
-            color: var(--text-main);
-            border-bottom: 2px solid var(--accent-primary);
-            font-weight: 700;
-        }
-
-        /* --- ANIMATED DATA NODE (Replaces Profile Pic) --- */
-        .data-loader {
-            width: 80px;
-            height: 80px;
-            position: relative;
-            perspective: 1000px;
-        }
-        .cube {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            transform-style: preserve-3d;
-            animation: spin 8s infinite linear;
-        }
-        .face {
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            border: 2px solid var(--data-node-color);
-            opacity: 0.5;
-            background: rgba(255,255,255,0.05);
-        }
-        .face:nth-child(1) { transform: rotateY(0deg) translateZ(40px); }
-        .face:nth-child(2) { transform: rotateY(90deg) translateZ(40px); }
-        .face:nth-child(3) { transform: rotateY(180deg) translateZ(40px); }
-        .face:nth-child(4) { transform: rotateY(-90deg) translateZ(40px); }
-        .face:nth-child(5) { transform: rotateX(90deg) translateZ(40px); }
-        .face:nth-child(6) { transform: rotateX(-90deg) translateZ(40px); }
-
-        @keyframes spin {
-            from { transform: rotateX(0deg) rotateY(0deg); }
-            to { transform: rotateX(360deg) rotateY(360deg); }
-        }
-
-        /* Interactive hovers */
-        .hover-lift { transition: transform 0.2s; }
-        .hover-lift:hover { transform: translateY(-2px); }
-
-        /* Typewriter Cursor */
-        .cursor {
-            display: inline-block;
-            width: 8px;
-            height: 16px;
-            background: var(--accent-primary);
-            animation: blink 1s step-end infinite;
-        }
-        @keyframes blink { 50% { opacity: 0; } }
-
-        /* Dynamic Text Colors via CSS Vars */
-        .text-theme-main { color: var(--text-main); }
-        .text-theme-muted { color: var(--text-muted); }
-        .border-theme { border-color: var(--glass-border); }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Science Portfolio | [Your Name]</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="min-h-screen flex flex-col items-center justify-start md:justify-center p-4 md:p-8">
+<body>
 
-    <!-- Background Layers -->
-    <canvas id="bg-canvas"></canvas>
-    <div class="noise-overlay"></div>
-    <div class="scanlines"></div>
+    <nav class="navbar">
+        <div class="logo">[Your Name]</div>
+        <ul class="nav-links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
 
-    <!-- Main Container -->
-    <main class="w-full max-w-6xl flex flex-col md:flex-row gap-6 relative z-10 h-full md:h-[85vh]">
-        
-        <!-- SIDEBAR: Data Identity -->
-        <aside class="w-full md:w-1/3 flex flex-col shrink-0">
-            <div class="glass-panel h-full p-6 flex flex-col items-center text-center relative">
-                
-                <!-- TOP BAR: Theme Toggle & Timezone Indicator -->
-                <div class="absolute top-4 w-full flex justify-between px-6">
-                    <!-- Theme Toggle -->
-                    <button id="theme-toggle" onclick="toggleThemeState()" class="p-2 rounded-full border border-theme bg-white/10 hover:bg-white/20 transition text-theme-muted">
-                        <i id="theme-icon" data-lucide="sun-moon" class="w-4 h-4"></i>
-                    </button>
-                    <!-- Timezone Badge -->
-                    <div id="timezone-badge" class="text-[10px] font-mono px-2 py-1 rounded border border-theme bg-white/10 text-theme-muted uppercase">
-                        Detecting...
-                    </div>
-                </div>
-
-                <!-- Abstract Data Visualization (Replaces Profile Pic) -->
-                <div class="mt-16 mb-6">
-                    <div class="data-loader">
-                        <div class="cube">
-                            <div class="face"></div>
-                            <div class="face"></div>
-                            <div class="face"></div>
-                            <div class="face"></div>
-                            <div class="face"></div>
-                            <div class="face"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <h1 class="text-3xl font-bold tracking-tight mb-1 text-theme-main">Alex.Data</h1>
-                
-                <!-- Linux Prompt Motto -->
-                <div class="font-mono text-sm mb-6 px-3 py-1 rounded-full border border-theme bg-white/5 text-theme-muted">
-                    <span style="color: var(--accent-primary)">$</span> analyst@data_node
-                </div>
-
-                <!-- Skill Clusters -->
-                <div class="w-full space-y-4 mb-auto">
-                    <div>
-                        <h3 class="text-xs font-bold uppercase tracking-widest text-theme-muted mb-2">Core Stack</h3>
-                        <div class="flex flex-wrap justify-center gap-2">
-                            <span class="px-2 py-1 rounded bg-blue-500/10 border border-blue-500/20 text-xs text-blue-400">Python</span>
-                            <span class="px-2 py-1 rounded bg-orange-500/10 border border-orange-500/20 text-xs text-orange-400">PyTorch</span>
-                            <span class="px-2 py-1 rounded bg-green-500/10 border border-green-500/20 text-xs text-green-400">SQL</span>
-                            <span class="px-2 py-1 rounded bg-purple-500/10 border border-purple-500/20 text-xs text-purple-400">Pandas</span>
-                        </div>
-                    </div>
-                    
-                    <div>
-                        <h3 class="text-xs font-bold uppercase tracking-widest text-theme-muted mb-2">Specialization</h3>
-                        <div class="flex flex-wrap justify-center gap-2">
-                            <span class="px-2 py-1 rounded bg-white/5 border border-theme text-xs text-theme-muted">NLP</span>
-                            <span class="px-2 py-1 rounded bg-white/5 border border-theme text-xs text-theme-muted">Computer Vision</span>
-                            <span class="px-2 py-1 rounded bg-white/5 border border-theme text-xs text-theme-muted">ETL Pipelines</span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Footer Links -->
-                <div class="w-full grid grid-cols-3 gap-3 mt-6">
-                    <a href="#" class="hover-lift p-3 rounded-xl bg-white/5 border border-theme flex items-center justify-center text-theme-main hover:bg-white/10 transition">
-                        <i data-lucide="github" class="w-5 h-5"></i>
-                    </a>
-                    <a href="#" class="hover-lift p-3 rounded-xl bg-white/5 border border-theme flex items-center justify-center text-theme-main hover:bg-white/10 transition">
-                        <i data-lucide="linkedin" class="w-5 h-5"></i>
-                    </a>
-                    <a href="#" class="hover-lift p-3 rounded-xl bg-white/5 border border-theme flex items-center justify-center text-theme-main hover:bg-white/10 transition">
-                        <i data-lucide="file-text" class="w-5 h-5"></i>
-                    </a>
-                </div>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Hi, I'm <span class="highlight">[Your Name]</span></h1>
+            <h2>Data Science Student & ML Enthusiast</h2>
+            <p>I transform raw data into actionable insights using Python, SQL, and Deep Learning.</p>
+            <div class="hero-buttons">
+                <a href="#projects" class="btn primary-btn">View My Work</a>
+                <a href="[LINK_TO_RESUME]" class="btn secondary-btn" target="_blank">Download Resume</a>
             </div>
-        </aside>
+            <div class="social-icons">
+                <a href="https://github.com/[yourusername]" target="_blank"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/[yourusername]" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="mailto:your.email@example.com"><i class="fas fa-envelope"></i></a>
+            </div>
+        </div>
+    </section>
 
-        <!-- MAIN WINDOW: Workspace -->
-        <section class="w-full md:w-2/3 h-full flex flex-col glass-panel">
+    <section id="skills" class="section">
+        <h2 class="section-title">Technical Skills</h2>
+        <div class="skills-container">
+            <div class="skill-category">
+                <h3>Languages & Databases</h3>
+                <p>Python, R, SQL (PostgreSQL, MySQL), C++</p>
+            </div>
+            <div class="skill-category">
+                <h3>Libraries & Frameworks</h3>
+                <p>Pandas, NumPy, Scikit-Learn, TensorFlow, PyTorch, Keras</p>
+            </div>
+            <div class="skill-category">
+                <h3>Tools & Visualization</h3>
+                <p>Tableau, PowerBI, Matplotlib, Seaborn, Git, Docker, Jupyter</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="section">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-grid">
             
-            <!-- Window Header (Linux Style: Control Dots on Right) -->
-            <header class="p-3 border-b border-theme flex items-center justify-between shrink-0 bg-black/5">
-                <div class="text-xs font-mono uppercase tracking-widest text-theme-muted w-1/3">
-                    <span id="time-display">00:00</span>
+            <div class="project-card">
+                <div class="card-image">
+                    <img src="https://placehold.co/600x400/2c3e50/FFF?text=NLP+Project" alt="Project 1">
                 </div>
-                <div class="text-xs font-mono uppercase tracking-widest text-theme-muted w-1/3 text-center">
-                    /home/analyst/portfolio.sh
-                </div>
-                <div class="flex items-center gap-2 w-1/3 justify-end">
-                    <div class="w-3 h-3 rounded-full bg-red-500/80"></div>
-                    <div class="w-3 h-3 rounded-full bg-yellow-500/80"></div>
-                    <div class="w-3 h-3 rounded-full bg-green-500/80"></div>
-                </div>
-            </header>
-
-            <!-- Tabs -->
-            <nav class="flex border-b border-theme bg-white/5 overflow-x-auto">
-                <button onclick="switchTab('about')" class="nav-btn active flex-1 min-w-[100px] py-3 text-sm font-mono">
-                    ABOUT
-                </button>
-                <button onclick="switchTab('projects')" class="nav-btn flex-1 min-w-[100px] py-3 text-sm font-mono">
-                    PROJECTS
-                </button>
-                <!-- RENAMED FROM GALLERY TO CONTACT -->
-                <button onclick="switchTab('contact')" class="nav-btn flex-1 min-w-[100px] py-3 text-sm font-mono">
-                    CONTACT
-                </button>
-            </nav>
-
-            <!-- Content Area -->
-            <div class="flex-1 overflow-y-auto p-4 md:p-8 relative">
-                
-                <!-- 1. ABOUT TAB (Active by default) -->
-                <div id="about" class="tab-content space-y-8">
-                    
-                    <div class="space-y-4 p-4 rounded-lg bg-white/5 border border-theme">
-                        <h2 class="text-2xl font-extrabold text-theme-main border-b-2 border-accent-primary pb-2 inline-block">About the Analyst</h2>
-                        <p class="text-theme-muted text-base leading-relaxed">
-                            Welcome to my data workspace! I am a Master's student specializing in Data Science, focused on leveraging Machine Learning, statistical modeling, and large-scale data processing to uncover complex patterns and drive predictive power. I thrive in environments where data quality meets algorithmic rigor.
-                        </p>
-                        <p class="text-theme-muted text-base leading-relaxed">
-                            My expertise includes building end-to-end data pipelines, developing deep learning models (especially for NLP and CV), and performing robust A/B testing and exploratory data analysis (EDA). Explore the **PROJECTS** tab to see my models in action.
-                        </p>
-                    </div>
-
-                    <div class="space-y-4">
-                        <h3 class="text-xl font-bold text-theme-main">Educational Summary</h3>
-                        <div class="font-mono text-sm p-4 rounded-lg bg-black/20 border border-theme overflow-x-auto text-theme-main">
-                            <table class="w-full text-left border-collapse">
-                                <thead>
-                                    <tr class="border-b border-theme text-theme-muted">
-                                        <th class="py-2">Degree</th>
-                                        <th class="py-2">Institution</th>
-                                        <th class="py-2">Focus</th>
-                                        <th class="py-2">Year</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="py-2">M.S. Data Science</td>
-                                        <td class="py-2">Tech University</td>
-                                        <td class="py-2 text-blue-400">Deep Learning, NLP</td>
-                                        <td class="py-2 text-green-400">2025</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="py-2">B.S. Mathematics</td>
-                                        <td class="py-2">State College</td>
-                                        <td class="py-2 text-blue-400">Applied Statistics</td>
-                                        <td class="py-2 text-green-400">2022</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                <div class="card-content">
+                    <h3>Project Name (e.g., Medha)</h3>
+                    <p class="tech-stack"><span>NLP</span> <span>Python</span> <span>Streamlit</span></p>
+                    <p>A brief description of the project. Mention the problem you solved and the model you used (e.g., LLMs, RAG).</p>
+                    <div class="card-links">
+                        <a href="#" target="_blank"><i class="fab fa-github"></i> Code</a>
+                        <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
                     </div>
                 </div>
-
-                <!-- 2. PROJECTS TAB -->
-                <div id="projects" class="tab-content hidden space-y-4">
-                    
-                    <!-- Project 1 -->
-                    <div class="group relative rounded-xl border border-theme bg-white/5 overflow-hidden hover-lift p-5">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-lg font-bold text-theme-main">Customer Churn Predictor</h3>
-                            <span class="text-[10px] font-mono px-2 py-1 rounded bg-blue-500/20 text-blue-400">XGBoost</span>
-                        </div>
-                        <p class="text-sm text-theme-muted mb-4">
-                            End-to-end pipeline analyzing telecom data. Implemented SMOTE for class imbalance and deployed via Streamlit.
-                        </p>
-                        <div class="flex gap-4 text-xs font-mono text-theme-muted">
-                            <span class="flex items-center gap-1"><div class="w-2 h-2 bg-green-400 rounded-full"></div> Accuracy: 94%</span>
-                            <span class="flex items-center gap-1"><div class="w-2 h-2 bg-yellow-400 rounded-full"></div> F1-Score: 0.91</span>
-                        </div>
-                        <div class="mt-4 pt-4 border-t border-theme flex gap-3">
-                            <a href="#" class="text-xs font-bold text-theme-main hover:text-accent-primary flex items-center gap-1">View Notebook <i data-lucide="arrow-right" class="w-3 h-3"></i></a>
-                        </div>
-                    </div>
-
-                    <!-- Project 2 -->
-                    <div class="group relative rounded-xl border border-theme bg-white/5 overflow-hidden hover-lift p-5">
-                        <div class="flex justify-between items-start mb-2">
-                            <h3 class="text-lg font-bold text-theme-main">Stock Sentiment NLP</h3>
-                            <span class="text-[10px] font-mono px-2 py-1 rounded bg-purple-500/20 text-purple-400">BERT</span>
-                        </div>
-                        <p class="text-sm text-theme-muted mb-4">
-                            Scraped 50k Reddit comments to analyze market sentiment using HuggingFace transformers. Visualized correlation with stock prices.
-                        </p>
-                        <div class="mt-4 pt-4 border-t border-theme flex gap-3">
-                            <a href="#" class="text-xs font-bold text-theme-main hover:text-accent-primary flex items-center gap-1">View Repo <i data-lucide="github" class="w-3 h-3"></i></a>
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- 3. CONTACT TAB (NEW) -->
-                <div id="contact" class="tab-content hidden space-y-6 p-4 rounded-lg bg-black/20 border border-theme">
-                    <h3 class="text-xl font-bold text-theme-main border-b border-theme pb-2">Get in Touch</h3>
-                    <p class="text-theme-muted">
-                        I am currently seeking full-time roles and research opportunities starting in 2025. Please feel free to reach out to discuss data challenges, machine learning implementations, or potential collaborations.
-                    </p>
-                    
-                    <div class="space-y-3 font-mono text-sm">
-                        <div class="flex items-center gap-3 text-theme-main">
-                            <i data-lucide="mail" class="w-4 h-4 text-accent-primary"></i> 
-                            <a href="mailto:alex@datanode.com" class="hover:underline">alex@datanode.com</a>
-                        </div>
-                        <div class="flex items-center gap-3 text-theme-main">
-                            <i data-lucide="linkedin" class="w-4 h-4 text-accent-primary"></i> 
-                            <a href="#" class="hover:underline">/in/alex-data-analyst</a>
-                        </div>
-                        <div class="flex items-center gap-3 text-theme-main">
-                            <i data-lucide="github" class="w-4 h-4 text-accent-primary"></i> 
-                            <a href="#" class="hover:underline">github.com/alexdatamaster</a>
-                        </div>
-                    </div>
-
-                    <!-- Placeholder Form (Simple Text Area) -->
-                    <div class="mt-6 pt-4 border-t border-theme">
-                        <label for="message" class="block text-theme-main mb-2">Send a quick message:</label>
-                        <textarea id="message" rows="4" class="w-full p-3 rounded-lg bg-white/10 border border-theme text-theme-main focus:outline-none focus:ring-2 focus:ring-accent-primary transition placeholder:text-theme-muted" placeholder="I have a project idea involving NLP..."></textarea>
-                        <button class="mt-3 w-full p-3 rounded-lg bg-accent-primary text-black font-bold hover:opacity-90 transition">
-                            Send Message (Simulated)
-                        </button>
-                    </div>
-
-                </div>
-
             </div>
-        </section>
-    </main>
 
-    <!-- Footer Status -->
-    <footer class="fixed bottom-0 left-0 w-full bg-glass-bg backdrop-blur-md border-t border-theme py-2 px-4 flex justify-between items-center z-50 text-[10px] md:text-xs text-theme-muted font-mono">
-        <div>
-            THEME STATE: <span id="current-theme-state" class="font-bold text-theme-main">AUTO</span>
+            <div class="project-card">
+                <div class="card-image">
+                    <img src="https://placehold.co/600x400/2c3e50/FFF?text=Computer+Vision" alt="Project 2">
+                </div>
+                <div class="card-content">
+                    <h3>Project Name (e.g., RealSign)</h3>
+                    <p class="tech-stack"><span>Computer Vision</span> <span>PyTorch</span> <span>OpenCV</span></p>
+                    <p>Description of the project. Focus on metrics (e.g., "Achieved 95% accuracy on MNIST dataset").</p>
+                    <div class="card-links">
+                        <a href="#" target="_blank"><i class="fab fa-github"></i> Code</a>
+                        <a href="#" target="_blank"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+                    </div>
+                </div>
+            </div>
+
+             <div class="project-card">
+                <div class="card-image">
+                    <img src="https://placehold.co/600x400/2c3e50/FFF?text=Data+Analysis" alt="Project 3">
+                </div>
+                <div class="card-content">
+                    <h3>Exploratory Data Analysis</h3>
+                    <p class="tech-stack"><span>Pandas</span> <span>Seaborn</span> <span>Excel</span></p>
+                    <p>Analyzing complex datasets to find trends in financial or behavioral data.</p>
+                    <div class="card-links">
+                        <a href="#" target="_blank"><i class="fab fa-github"></i> Code</a>
+                    </div>
+                </div>
+            </div>
+
         </div>
-        <div class="flex items-center gap-2">
-            <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-            KERNEL: IDLE
-        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 [Your Name]. Built with code & data.</p>
     </footer>
 
-    <script>
-        // --- 1. INITIALIZE ICONS ---
-        lucide.createIcons();
-
-        // Global variable to store theme preference: 'auto', 'light', or 'dark'
-        let currentThemeState = 'auto'; // Default state is auto
-
-        // --- 2. THEME LOGIC ---
-
-        function applyTheme(isLight) {
-            const body = document.body;
-            const themeStateLabel = document.getElementById('current-theme-state');
-            const themeIcon = document.getElementById('theme-icon');
-
-            if (isLight) {
-                body.classList.add('light-theme');
-                lucide.createIcons({ icons: { 'sun-moon': lucide.icons['sun-moon'] }, attrs: { color: 'var(--text-main)', class: 'w-4 h-4', id: 'theme-icon' } });
-            } else {
-                body.classList.remove('light-theme');
-                lucide.createIcons({ icons: { 'sun-moon': lucide.icons['sun-moon'] }, attrs: { color: 'var(--text-main)', class: 'w-4 h-4', id: 'theme-icon' } });
-            }
-
-            // Update footer status based on the *set* state
-            if (currentThemeState === 'auto') {
-                themeStateLabel.textContent = `AUTO (${isLight ? 'DAY' : 'NIGHT'})`;
-            } else {
-                themeStateLabel.textContent = currentThemeState.toUpperCase();
-            }
-        }
-
-        function determineAutoTheme() {
-            const now = new Date();
-            const hours = now.getHours();
-            // 6 AM to 6 PM is Day (Light/Frutiger), else Night (Dark/Soft Club)
-            return hours >= 6 && hours < 18;
-        }
-
-        function updateTheme() {
-            const now = new Date();
-            const timeDisplay = document.getElementById('time-display');
-
-            // 1. Time Display and Timezone
-            const timeString = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-            timeDisplay.textContent = timeString;
-            const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-            document.getElementById('timezone-badge').textContent = timezone;
-
-            // 2. Apply Theme based on State
-            let isLight;
-            if (currentThemeState === 'dark') {
-                isLight = false;
-            } else if (currentThemeState === 'light') {
-                isLight = true;
-            } else { // 'auto'
-                isLight = determineAutoTheme();
-            }
-
-            applyTheme(isLight);
-        }
-
-        function toggleThemeState() {
-            if (currentThemeState === 'auto') {
-                // If currently 'auto' (which might be light or dark), switch to the opposite manual mode.
-                const isCurrentlyLight = document.body.classList.contains('light-theme');
-                currentThemeState = isCurrentlyLight ? 'dark' : 'light';
-            } else if (currentThemeState === 'light') {
-                currentThemeState = 'dark';
-            } else { // 'dark'
-                currentThemeState = 'auto';
-            }
-            updateTheme();
-        }
-
-        // Check theme on load and every minute
-        updateTheme();
-        setInterval(updateTheme, 60000);
-
-
-        // --- 3. TAB LOGIC ---
-        function switchTab(tabId) {
-            // Hide all
-            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-            // Reset nav buttons
-            document.querySelectorAll('.nav-btn').forEach(el => {
-                el.classList.remove('active');
-            });
-            
-            // Show Target
-            document.getElementById(tabId).classList.remove('hidden');
-            // Activate Button
-            const btn = document.querySelector(`button[onclick="switchTab('${tabId}')"]`);
-            if(btn) btn.classList.add('active');
-        }
-
-        // Initialize first tab content (renamed from notebook)
-        switchTab('about');
-
-
-        // --- 4. CANVAS ANIMATION (Particles) ---
-        const canvas = document.getElementById('bg-canvas');
-        const ctx = canvas.getContext('2d');
-        let width, height;
-        let particles = [];
-
-        function resize() {
-            width = canvas.width = window.innerWidth;
-            height = canvas.height = window.innerHeight;
-        }
-
-        class Particle {
-            constructor() {
-                this.reset();
-            }
-
-            reset() {
-                this.x = Math.random() * width;
-                this.y = height + Math.random() * 50;
-                this.size = Math.random() * 4 + 1; // Smaller, data-like points
-                this.speed = Math.random() * 1 + 0.2;
-                this.opacity = Math.random() * 0.5 + 0.1;
-                // Randomly assign a binary string or just a dot
-                this.isBinary = Math.random() > 0.8; 
-                this.val = Math.random() > 0.5 ? '1' : '0';
-            }
-
-            update() {
-                this.y -= this.speed;
-                if (this.y < -20) this.reset();
-            }
-
-            draw() {
-                // Check theme to determine color
-                const isLight = document.body.classList.contains('light-theme');
-                const color = isLight ? 'rgba(14, 165, 233,' : 'rgba(34, 211, 238,'; // Sky Blue vs Cyan
-
-                ctx.fillStyle = `${color} ${this.opacity})`;
-                
-                if (this.isBinary && this.size > 3) {
-                    ctx.font = `${this.size * 3}px monospace`;
-                    ctx.fillText(this.val, this.x, this.y);
-                } else {
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-            }
-        }
-
-        function initParticles() {
-            particles = [];
-            const count = window.innerWidth < 768 ? 40 : 80;
-            for(let i=0; i<count; i++) particles.push(new Particle());
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, width, height);
-            particles.forEach(p => {
-                p.update();
-                p.draw();
-            });
-            requestAnimationFrame(animate);
-        }
-
-        window.addEventListener('resize', () => {
-            resize();
-            initParticles();
-        });
-        
-        resize();
-        initParticles();
-        animate();
-
-    </script>
 </body>
 </html>
