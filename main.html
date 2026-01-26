@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio | CSE Data Science Graduate</title>
+    <style>
+        :root {
+            /* Using a tech-focused blue palette */
+            --primary: #0f172a;      /* Dark Slate */
+            --accent: #3b82f6;       /* Bright Blue */
+            --text-main: #334155;
+            --text-light: #64748b;
+            --bg-light: #f8fafc;
+            --white: #ffffff;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            color: var(--text-main);
+            background-color: var(--white);
+        }
+
+        /* Layout */
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            color: var(--primary);
+            margin-top: 0;
+        }
+
+        h1 {
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            border-left: 5px solid var(--accent);
+            padding-left: 15px;
+            margin-bottom: 30px;
+        }
+
+        /* Header / Hero */
+        header {
+            padding: 120px 0 80px;
+            background: linear-gradient(to right, #f8fafc, #ffffff);
+        }
+
+        .role-title {
+            font-size: 1.25rem;
+            color: var(--accent);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        /* Skills Tags */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .skill-tag {
+            background: #e0f2fe;
+            color: #0369a1;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* Experience & Project Cards */
+        .card-grid {
+            display: grid;
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--white);
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 24px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            border-color: var(--accent);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin-bottom: 12px;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .card-subtitle {
+            color: var(--accent);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .card-date {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            font-family: monospace;
+        }
+
+        ul {
+            padding-left: 20px;
+            margin-bottom: 0;
+        }
+
+        li {
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        /* Education & Certs - Compact View */
+        .compact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        /* Contact Button */
+        .btn {
+            display: inline-block;
+            background: var(--primary);
+            color: var(--white);
+            padding: 14px 32px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: background 0.2s;
+        }
+
+        .btn:hover {
+            background: var(--accent);
+        }
+
+        @media (max-width: 600px) {
+            h1 { font-size: 2.25rem; }
+            .card-header { flex-direction: column; gap: 4px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container">
+            <span class="role-title">B.Tech Graduate (CSE – Data Science)</span>
+            <h1>[Your Name Here]</h1>
+            <p style="font-size: 1.1rem; max-width: 700px; color: var(--text-light);">
+                Final year graduate (2025) with a strong foundation in software development, 
+                backend application design, and Linux-based systems. Experienced in developing 
+                scalable applications and automation workflows through multiple internships.
+            </p>
+            
+            <div style="margin-top: 30px;">
+                <p style="font-weight: 600; margin-bottom: 10px;">Core Technologies:</p>
+                <div class="skills-grid">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">Java</span>
+                    <span class="skill-tag">SQL</span>
+                    <span class="skill-tag">Linux (Bash)</span>
+                    <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">Git/GitHub</span>
+                    <span class="skill-tag">n8n Automation</span>
+                    <span class="skill-tag">GCP</span>
+                </div>
+            </div>
+            
+            <a href="mailto:your-email@example.com" class="btn">Contact Me</a>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="container">
+            <h2>Professional Experience</h2>
+            <div class="card-grid">
+                
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">Product Internship Trainee</div>
+                            <div class="card-subtitle">HackBoats</div>
+                        </div>
+                        <div class="card-date">Dec 2024 – Feb 2025</div>
+                    </div>
+                    <ul>
+                        <li>Contributed to the design and development of an AI-based accessibility application, aligning technical implementation with business requirements.</li>
+                        <li>Delivered comprehensive technical reports on the Sign Language Recognition system.</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">Zero Trust Cloud Security Intern</div>
+                            <div class="card-subtitle">Zscaler (via EduSkills)</div>
+                        </div>
+                        <div class="card-date">July 2024 – Sep 2024</div>
+                    </div>
+                    <ul>
+                        <li>Implemented secure access policies using Zscaler in an enterprise cloud environment.</li>
+                        <li>Managed cloud security protocols including encryption and vulnerability assessments.</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">Cyber Security Intern</div>
+                            <div class="card-subtitle">APSSDC & EduSkills Foundation</div>
+                        </div>
+                        <div class="card-date">June 2024 – July 2024</div>
+                    </div>
+                    <ul>
+                        <li>Utilized Linux (Kali) for network scanning and vulnerability assessment.</li>
+                        <li>Executed penetration testing scripts to identify and patch system vulnerabilities.</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">Network Security Intern</div>
+                            <div class="card-subtitle">Palo Alto Networks</div>
+                        </div>
+                        <div class="card-date">May 2023 – July 2023</div>
+                    </div>
+                    <ul>
+                        <li>Deployed network security configurations using Palo Alto's Beacon platform.</li>
+                        <li>Analyzed firewall rules to enhance defense mechanisms against cyber threats.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="section" style="background-color: var(--bg-light);">
+        <div class="container">
+            <h2>Key Projects</h2>
+            <div class="card-grid">
+                
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Automated Sign Language Recognition App</div>
+                        <div class="card-date">March 2025</div>
+                    </div>
+                    <p><strong>Tech Stack:</strong> Python, Computer Vision, Modular Backend</p>
+                    <ul>
+                        <li>Designed a real-time application using Python and computer vision to translate gestures into text.</li>
+                        <li>Built a modular backend architecture enabling scalability for future language expansions.</li>
+                    </ul>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <div class="card-title">Local AI Discord Automation Bot</div>
+                        <div class="card-date">Jan 2025</div>
+                    </div>
+                    <p><strong>Tech Stack:</strong> n8n, Local LLM (LM Studio), Discord API</p>
+                    <ul>
+                        <li>Deployed a fully local chatbot using n8n workflows and local LLM inference to ensure data privacy.</li>
+                        <li>Integrated Discord APIs to automate server administration tasks without external cloud services.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <div class="compact-grid">
+                
+                <div>
+                    <h2>Education</h2>
+                    <div style="margin-bottom: 20px;">
+                        <div class="card-title">B.Tech in CSE (Data Science)</div>
+                        <div class="card-subtitle">KKR and KSR Institute of Technology and Sciences</div>
+                        <div class="card-date">Nov 2021 – June 2025</div>
+                        <p>GPA: 7.81/10</p>
+                    </div>
+                    <div>
+                        <div class="card-title">Intermediate</div>
+                        <div class="card-subtitle">Bhashyam Junior College</div>
+                        <div class="card-date">Apr 2019 – May 2021</div>
+                        <p>Percentage: 81.9%</p>
+                    </div>
+                </div>
+
+                <div>
+                    <h2>Certifications</h2>
+                    <ul style="list-style-type: none; padding: 0;">
+                        <li style="margin-bottom: 15px; padding-left: 15px; border-left: 3px solid #cbd5e1;">
+                            <strong>Fundamentals of Security Operations</strong><br>
+                            <span style="color: var(--text-light);">Palo Alto Networks</span>
+                        </li>
+                        <li style="margin-bottom: 15px; padding-left: 15px; border-left: 3px solid #cbd5e1;">
+                            <strong>NDG Linux Unhatched</strong><br>
+                            <span style="color: var(--text-light);">Cisco Networking Academy</span>
+                        </li>
+                        <li style="margin-bottom: 15px; padding-left: 15px; border-left: 3px solid #cbd5e1;">
+                            <strong>Zero Trust Cloud Security</strong><br>
+                            <span style="color: var(--text-light);">EduSkills Foundation (Zscaler)</span>
+                        </li>
+                        <li style="margin-bottom: 15px; padding-left: 15px; border-left: 3px solid #cbd5e1;">
+                            <strong>Cybersecurity Job Simulations</strong><br>
+                            <span style="color: var(--text-light);">Forage (JPMorgan Chase & Co)</span>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer style="text-align: center; padding: 40px 0; border-top: 1px solid #e2e8f0; color: var(--text-light);">
+        <p>© 2026 [Your Name]. Built with HTML & CSS.</p>
+    </footer>
+
+</body>
+</html>
