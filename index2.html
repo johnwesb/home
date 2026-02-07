@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title><!-- CHANGE YOUR NAME HERE -->Alex Morgan — Portfolio</title>
+  <meta name="description" content="Computer Science student portfolio showcasing projects, skills, and contact information." />
+
+  <!-- =========================
+       CSS VARIABLES & RESET
+  ========================== -->
+  <style>
+    :root {
+      /* Colors */
+      --bg-main: #0b0c10;
+      --glass-bg: rgba(30, 30, 40, 0.22);
+      --glass-border: rgba(255, 255, 255, 0.14);
+      --text-primary: #f5f6fa;
+      --text-secondary: #b8bccf;
+      --accent: #6cf2c2;
+      --accent-soft: rgba(108, 242, 194, 0.35);
+
+      /* Effects */
+      --blur-strong: blur(28px) saturate(160%);
+      --blur-soft: blur(18px) saturate(140%);
+      --shadow-soft: 0 12px 40px rgba(0,0,0,0.45);
+
+      /* Radii */
+      --radius-xl: 36px;
+      --radius-lg: 28px;
+      --radius-md: 20px;
+
+      /* Spacing */
+      --space-xs: clamp(0.5rem, 1vw, 0.75rem);
+      --space-sm: clamp(0.75rem, 1.5vw, 1rem);
+      --space-md: clamp(1rem, 2vw, 1.5rem);
+      --space-lg: clamp(1.5rem, 3vw, 2.5rem);
+      --space-xl: clamp(2.5rem, 6vw, 5rem);
+
+      /* Typography */
+      --fs-xs: clamp(0.75rem, 1.5vw, 0.85rem);
+      --fs-sm: clamp(0.85rem, 2vw, 0.95rem);
+      --fs-md: clamp(1rem, 2.4vw, 1.1rem);
+      --fs-lg: clamp(1.25rem, 3vw, 1.6rem);
+      --fs-xl: clamp(2.2rem, 7vw, 4.2rem);
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Display", sans-serif;
+      background: radial-gradient(1200px 800px at 10% 10%, #141528, #090a0f);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button {
+      font: inherit;
+      cursor: pointer;
+      border: none;
+      background: none;
+    }
+
+    /* =========================
+       GLASS UTILITY
+    ========================== */
+    .glass {
+      background: var(--glass-bg);
+      backdrop-filter: var(--blur-strong);
+      -webkit-backdrop-filter: var(--blur-strong);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow-soft);
+      border-radius: var(--radius-lg);
+    }
+
+    /* =========================
+       NAVIGATION
+    ========================== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      padding: var(--space-sm) var(--space-lg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-inner {
+      width: 100%;
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .nav-logo {
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: var(--space-md);
+    }
+
+    .nav-links a {
+      padding: 0.6rem 1rem;
+      border-radius: 999px;
+      font-size: var(--fs-sm);
+      opacity: 0.9;
+    }
+
+    .nav-links a:focus-visible {
+      outline: 2px solid var(--accent);
+    }
+
+    /* =========================
+       HERO SECTION
+    ========================== */
+    .hero {
+      min-height: 95vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--space-xl) var(--space-lg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: -20%;
+      background:
+        radial-gradient(600px 600px at 30% 30%, rgba(108,242,194,0.18), transparent 60%),
+        radial-gradient(500px 500px at 70% 60%, rgba(140,180,255,0.12), transparent 65%);
+      animation: floatBG 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatBG {
+      from { transform: translateY(-20px); }
+      to { transform: translateY(20px); }
+    }
+
+    .hero-content {
+      max-width: 800px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: var(--fs-xl);
+      letter-spacing: 0.12em;
+      margin-bottom: var(--space-md);
+      opacity: 0;
+      animation: reveal 1.2s ease forwards;
+    }
+
+    @keyframes reveal {
+      to {
+        opacity: 1;
+        letter-spacing: 0.04em;
+      }
+    }
+
+    .hero p {
+      font-size: var(--fs-md);
+      color: var(--text-secondary);
+      margin-bottom: var(--space-lg);
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: var(--space-md);
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      min-width: 160px;
+      padding: 0.9rem 1.4rem;
+      border-radius: var(--radius-xl);
+      font-size: var(--fs-sm);
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: var(--blur-soft);
+      border: 1px solid var(--glass-border);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .btn.primary {
+      background: linear-gradient(135deg, var(--accent), #9bf5d5);
+      color: #05110c;
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+    }
+
+    /* =========================
+       SECTIONS
+    ========================== */
+    section {
+      padding: var(--space-xl) var(--space-lg);
+    }
+
+    .section-inner {
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .section-title {
+      font-size: var(--fs-lg);
+      margin-bottom: var(--space-lg);
+    }
+
+    /* =========================
+       ABOUT
+    ========================== */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-sm);
+      margin-top: var(--space-md);
+    }
+
+    .tag {
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      font-size: var(--fs-xs);
+      background: rgba(255,255,255,0.08);
+      border: 1px solid var(--glass-border);
+    }
+
+    /* =========================
+       PROJECTS
+    ========================== */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: var(--space-lg);
+    }
+
+    @media (min-width: 700px) {
+      .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 1100px) {
+      .projects-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .project-card {
+      padding: var(--space-lg);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 18px 60px rgba(0,0,0,0.6);
+    }
+
+    .project-card h3 {
+      margin-top: 0;
+      margin-bottom: var(--space-sm);
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xs);
+      margin: var(--space-sm) 0;
+    }
+
+    /* =========================
+       SKILLS
+    ========================== */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: var(--space-md);
+    }
+
+    /* =========================
+       CONTACT
+    ========================== */
+    form {
+      display: grid;
+      gap: var(--space-sm);
+    }
+
+    input, textarea {
+      padding: 0.8rem 1rem;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--glass-border);
+      background: rgba(255,255,255,0.06);
+      color: var(--text-primary);
+    }
+
+    textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+    footer {
+      padding: var(--space-lg);
+      text-align: center;
+      font-size: var(--fs-xs);
+      color: var(--text-secondary);
+    }
+
+    /* =========================
+       SCROLL ANIMATIONS
+    ========================== */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       NAVIGATION
+  ========================== -->
+  <nav class="glass">
+    <div class="nav-inner">
+      <div class="nav-logo"><!-- YOUR NAME -->Alex Morgan</div>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- =========================
+       HERO
+  ========================== -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1><!-- YOUR NAME -->ALEX MORGAN</h1>
+      <p><!-- YOUR SUBTITLE -->
+        Computer Science Student • Developer • AI & Systems
+      </p>
+      <p><!-- YOUR TAGLINE -->
+        Building thoughtful software at the intersection of performance, design, and intelligence.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn primary">Explore Projects</a>
+        <a href="#contact" class="btn">Get in Touch</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================
+       ABOUT
+  ========================== -->
+  <section id="about">
+    <div class="section-inner reveal">
+      <h2 class="section-title">About</h2>
+      <p>
+        <!-- EDIT BIO -->
+        I’m a Computer Science student passionate about building elegant, high-performance software.
+        My interests span systems programming, machine learning, and full-stack development.
+      </p>
+
+      <div class="tags">
+        <!-- EDIT TAGS -->
+        <span class="tag">C++</span>
+        <span class="tag">Python</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">AI</span>
+        <span class="tag">Distributed Systems</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================
+       PROJECTS
+  ========================== -->
+  <section id="projects">
+    <div class="section-inner">
+      <h2 class="section-title">Projects</h2>
+
+      <div class="projects-grid">
+        <!-- PROJECT CARD -->
+        <div class="project-card glass reveal">
+          <h3><!-- PROJECT TITLE -->Neural Search Engine</h3>
+          <p><!-- PROJECT DESC -->
+            Semantic search system using transformer embeddings and efficient vector indexing.
+          </p>
+          <div class="project-tech">
+            <span class="tag">Python</span>
+            <span class="tag">FAISS</span>
+            <span class="tag">NLP</span>
+          </div>
+          <a href="#" class="btn">GitHub</a>
+        </div>
+
+        <div class="project-card glass reveal">
+          <h3>Real-Time Chat App</h3>
+          <p>
+            Secure WebSocket-based chat application with authentication and message persistence.
+          </p>
+          <div class="project-tech">
+            <span class="tag">Node.js</span>
+            <span class="tag">WebSocket</span>
+            <span class="tag">MongoDB</span>
+          </div>
+          <a href="#" class="btn">GitHub</a>
+        </div>
+
+        <div class="project-card glass reveal">
+          <h3>OS Scheduler Simulator</h3>
+          <p>
+            Visual simulator comparing CPU scheduling algorithms with live metrics.
+          </p>
+          <div class="project-tech">
+            <span class="tag">C++</span>
+            <span class="tag">Algorithms</span>
+          </div>
+          <a href="#" class="btn">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================
+       SKILLS
+  ========================== -->
+  <section id="skills">
+    <div class="section-inner reveal">
+      <h2 class="section-title">Skills</h2>
+      <div class="skills-grid">
+        <div class="glass tag">C / C++</div>
+        <div class="glass tag">Python</div>
+        <div class="glass tag">JavaScript</div>
+        <div class="glass tag">Linux</div>
+        <div class="glass tag">Git</div>
+        <div class="glass tag">Machine Learning</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =========================
+       CONTACT
+  ========================== -->
+  <section id="contact">
+    <div class="section-inner reveal">
+      <h2 class="section-title">Contact</h2>
+
+      <!-- Use Formspree or mailto -->
+      <form action="mailto:your@email.com" method="post" enctype="text/plain">
+        <input type="text" placeholder="Your Name" required />
+        <input type="email" placeholder="Your Email" required />
+        <textarea placeholder="Your Message" required></textarea>
+        <button class="btn primary" type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- =========================
+       FOOTER
+  ========================== -->
+  <footer>
+    © 2026 <!-- YOUR NAME -->Alex Morgan • Built with HTML, CSS & Vanilla JS
+  </footer>
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================== -->
+  <script>
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    document.querySelectorAll(".reveal").forEach(el => observer.observe(el));
+  </script>
+
+</body>
+</html>
