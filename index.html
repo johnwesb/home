@@ -3,34 +3,123 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio</title>
-    <link rel="stylesheet" href="css/style.css">
+    <title>John Wesley | Terminal</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+<div id="container">
+    
     <header>
-        <h1>Welcome to My Portfolio</h1>
+        <h1>JOHN WESLEY</h1>
+        <div class="nav-links">
+            <a href="index.html">system_root</a> ... 
+            <a href="about.html">about_me</a> ... 
+            <a href="https://linkedin.com/in/yourusername" target="_blank">linkedin</a> ... 
+            <a href="https://github.com/yourusername" target="_blank">github</a> ...
+            <a href="mailto:your.email@example.com">comms</a>
+        </div>
     </header>
-    <main>
-        <section id="about">
-            <h2>About Me</h2>
-            <p>Brief introduction about yourself.</p>
-        </section>
-        <section id="projects">
-            <h2>My Projects</h2>
-            <ul>
-                <li>Project 1</li>
-                <li>Project 2</li>
-                <li>Project 3</li>
-            </ul>
-        </section>
-        <section id="contact">
-            <h2>Contact Me</h2>
-            <p>Email: <a href="mailto:youremail@example.com">youremail@example.com</a></p>
-        </section>
-    </main>
+
+    <div class="intro">
+        System initialized. Welcome to the main directory.<br><br>
+        Final year B.Tech (CSE – Data Science) graduate with a strong foundation in software development, backend application design, SDLC concepts, and Linux-based systems. Experienced in developing modular, scalable applications and automation workflows.<br><br>
+        Browse the execution logs and security operations below.
+    </div>
+
+    <section>
+        <div class="section-header">
+            <span class="section-title">Executable Software (Projects)</span>
+            <a href="https://github.com/yourusername" class="view-all">view source</a>
+        </div>
+        <ul class="log-list">
+            <li class="log-item">
+                <div class="log-left">
+                    <span class="log-date">[Mar 2025]</span>
+                    <span class="log-title"><span class="tag-new">!!! NEW !!!</span><a href="#">Automated Sign Language Recognition App</a></span>
+                </div>
+                <div class="log-right">Python / CV</div>
+            </li>
+            <li class="log-detail">
+                <p>> Designed and developed a real-time software application using Python and computer vision to translate gestures into text.</p>
+                <p>> Built a modular backend architecture, enabling scalability, maintainability, and future language expansions.</p>
+            </li>
+
+            <li class="log-item">
+                <div class="log-left">
+                    <span class="log-date">[Jan 2025]</span>
+                    <span class="log-title"><a href="#">Local AI Discord Automation Bot</a></span>
+                </div>
+                <div class="log-right">n8n / Local LLM</div>
+            </li>
+            <li class="log-detail">
+                <p>> Designed and deployed a fully local chatbot using n8n automation workflows and local LLM inference.</p>
+                <p>> Integrated Discord APIs to automate server queries and administration tasks, eliminating reliance on external cloud services.</p>
+                <p>> Configured local server environments to handle message processing queues, demonstrating strong backend logic.</p>
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <div class="section-header">
+            <span class="section-title">Security & Operations Logs (Experience)</span>
+        </div>
+        <ul class="log-list">
+            <li class="log-item">
+                <div class="log-left">
+                    <span class="log-date">[Dec 2024]</span>
+                    <span class="log-title"><span class="tag-update">[OK]</span> HackBoats // Product Internship Trainee</span>
+                </div>
+                <div class="log-right">Dec 2024 - Feb 2025</div>
+            </li>
+            <li class="log-detail">
+                <p>> Contributed to the design, development and documentation of an AI-based accessibility application.</p>
+                <p>> Delivered comprehensive technical reports on the Sign Language Recognition system.</p>
+            </li>
+
+            <li class="log-item">
+                <div class="log-left">
+                    <span class="log-date">[Jul 2024]</span>
+                    <span class="log-title"><span class="tag-update">[OK]</span> Zscaler // Zero Trust Cloud Security Intern</span>
+                </div>
+                <div class="log-right">Jul 2024 - Sep 2024</div>
+            </li>
+            <li class="log-detail">
+                <p>> Implemented and managed secure access policies using Zscaler within an enterprise cloud environment.</p>
+                <p>> Managed cloud security protocols including encryption and vulnerability assessments.</p>
+            </li>
+
+            <li class="log-item">
+                <div class="log-left">
+                    <span class="log-date">[Jun 2024]</span>
+                    <span class="log-title"><span class="tag-update">[OK]</span> APSSDC & EduSkills // Cyber Security Intern</span>
+                </div>
+                <div class="log-right">Jun 2024 - Jul 2024</div>
+            </li>
+            <li class="log-detail">
+                <p>> Utilized Linux (Kali) for network scanning and vulnerability assessment.</p>
+                <p>> Analyzed security logs and executed penetration testing scripts to patch system vulnerabilities.</p>
+            </li>
+
+            <li class="log-item">
+                <div class="log-left">
+                    <span class="log-date">[May 2023]</span>
+                    <span class="log-title"><span class="tag-update">[OK]</span> Palo Alto Networks // Network Security Intern</span>
+                </div>
+                <div class="log-right">May 2023 - Jul 2023</div>
+            </li>
+            <li class="log-detail">
+                <p>> Deployed network security configurations using Palo Alto's Beacon platform to monitor traffic.</p>
+                <p>> Analyzed firewall rules and security policies to enhance defense mechanisms.</p>
+            </li>
+        </ul>
+    </section>
+
     <footer>
-        <p>&copy; 2026 John Wesb. All rights reserved.</p>
+        John Wesley © 2026
     </footer>
-    <script src="js/script.js"></script>
+
+</div>
+
 </body>
 </html>
